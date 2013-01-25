@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.ggj.pulse.ApplicationContainer;
+import com.ggj.pulse.entities.AbstractEntity;
 
 /**
  *
@@ -30,5 +31,11 @@ public class InputController extends InputAdapter {
         camera.unproject(this.pointer);
         Gdx.app.log("Mouse Pointer" , this.pointer.toString());
         return true;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+
+        return super.touchUp(screenX, screenY, pointer, button);    //To change body of overridden methods use File | Settings | File Templates.
     }
 }

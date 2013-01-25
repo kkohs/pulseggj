@@ -2,6 +2,7 @@ package com.ggj.pulse.utils;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.joints.RopeJointDef;
 import com.ggj.pulse.entities.AbstractEntity;
 
 /**
@@ -69,6 +70,28 @@ public class EntityFactory {
         entity.setPos(new Vector2(x, y));
         Body body = createObject(entity, shape);
 
+    }
+
+    public AbstractEntity createPlayer(float x, float y, float halfWidth, float halfHeight, float angle) {
+        AbstractEntity entity = new AbstractEntity();
+        entity.setPos(new Vector2(x,y));
+        entity.setStatic(false);
+        CircleShape shape = new CircleShape();
+        shape.setRadius(10);
+
+        Body body = createObject(entity,shape);
+
+        BodyDef invisBodyDef = new BodyDef();
+        invisBodyDef.position.set(50,50);
+        invisBodyDef.type = BodyDef.BodyType.StaticBody;
+        Body invis = world.createBody(invisBodyDef);
+
+        RopeJointDef ropeJointDef = new RopeJointDef();
+        ropeJointDef.bodyA = invis;
+        ropeJointDef.bodyB = body;
+
+        world.createJoint(ropeJointDef);
+        return entity;
     }
 
 
