@@ -19,6 +19,10 @@ public class PhysicsController {
         world = new World(new Vector2(0, 0), true);
     }
 
+    public void initialize() {
+        applicationContainer.put("world", world);
+    }
+
     public void update() {
         world.step(step, 100, 100);
     }

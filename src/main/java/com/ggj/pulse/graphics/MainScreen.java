@@ -1,7 +1,6 @@
-package com.ggj.pulse.logic;
+package com.ggj.pulse.graphics;
 
 import com.badlogic.gdx.Screen;
-import com.ggj.pulse.graphics.GraphicsController;
 
 /**
  * @author Modris Vekmanis
@@ -11,7 +10,7 @@ public class MainScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        int a=0;
+        graphicsController.render();
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.ggj.pulse.graphics;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.World;
 import com.ggj.pulse.ApplicationContainer;
 
 /**
@@ -11,6 +12,7 @@ import com.ggj.pulse.ApplicationContainer;
 public class GraphicsController {
 
     private ApplicationContainer applicationContainer;
+    private World world;
     private Camera camera;
     private Box2DDebugRenderer box2DDebugRenderer;
 
@@ -23,9 +25,13 @@ public class GraphicsController {
         camera.far = 101f;
     }
 
+    public void initialize() {
+        world = (World) applicationContainer.get("world");
+    }
+
     public void render() {
         camera.update();
-        //box2DDebugRenderer.render(,camera.projection);
+        box2DDebugRenderer.render(world, camera.projection);
     }
 
     public ApplicationContainer getApplicationContainer() {
