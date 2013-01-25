@@ -3,6 +3,7 @@ package com.ggj.pulse;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.ggj.pulse.graphics.GameScreen;
+import com.ggj.pulse.logic.InputController;
 import com.ggj.pulse.logic.LogicController;
 import com.ggj.pulse.logic.PhysicsController;
 import com.ggj.pulse.utils.AssetManager;
@@ -22,6 +23,7 @@ public class PulseGame extends Game {
     private PhysicsController physicsController;
     private GameScreen gameScreen;
     private EntityFactory entityFactory;
+    private InputController inputController;
 
     private AssetManager assetManager;
 
@@ -42,6 +44,8 @@ public class PulseGame extends Game {
         physicsController.setEntityFactory(entityFactory);
         logicController.setPhysicsController(physicsController);
 
+        inputController = new InputController(applicationContainer);
+
         entityFactory.setWorld(physicsController.getWorld());
 
         physicsController.initialize();
@@ -59,6 +63,6 @@ public class PulseGame extends Game {
     }
 
     public static void main(String[] args) {
-        new LwjglApplication(new PulseGame(), "Spēle", 1024, 768, true);
+        new LwjglApplication(new PulseGame(), "Spēle", 1600, 900, true);
     }
 }

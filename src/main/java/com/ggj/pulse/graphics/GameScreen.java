@@ -23,12 +23,13 @@ public class GameScreen extends AbstractScreen {
         box2DDebugRenderer = new Box2DDebugRenderer();
         camera.translate(50, 50, 200);
         camera.lookAt(50, 50, 0);
-        camera.near = 1f;
+        camera.near = 200f;
         camera.far = 201f;
     }
 
     public void initialize() {
         world = (World) applicationContainer.get("world");
+        applicationContainer.put("gameCam", camera);
     }
 
     @Override

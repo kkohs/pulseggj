@@ -21,11 +21,12 @@ public class PhysicsController {
 
     public void initialize() {
         applicationContainer.put("world", world);
-        entityFactory.createBox(0, 0, 10, 10, 3);
+        entityFactory.createStaticObject(40, 50, 10, 10, 3, "left");
+       entityFactory.createBox(150, 0, 10, 10, 3);
     }
 
     public void update() {
-        world.step(step, 100, 100);
+        world.step((float) (1.0/60.f), 10, 10);
     }
 
 

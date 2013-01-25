@@ -28,18 +28,38 @@ public class EntityFactory {
         }
 
         FixtureDef fixtureDef = new FixtureDef();
-
+        fixtureDef.shape = shape;
         fixtureDef.density = 2;
 
 
         Body body = world.createBody(bodyDef);
-        assetManager.attachShape(body, fixtureDef, 100, "left");
-        //     body.createFixture(fixtureDef);
+      //  assetManager.attachShape(body, fixtureDef, 100, "left");
+          body.createFixture(fixtureDef);
         body.setAngularDamping(0.5f);
         body.setLinearDamping(0.05f);
-
-
+        if(shape != null) {
+            shape.dispose();
+        }
         return body;
+    }
+
+    public AbstractEntity createStaticObject(float x, float y, float halfWidth, float halfHeight, float angle, String bodyName) {
+        AbstractEntity entity = new AbstractEntity();
+        entity.setPos(new Vector2(x, y));
+
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.position.x = entity.getPos().x;
+        bodyDef.position.y = entity.getPos().y;
+        bodyDef.type = BodyDef.BodyType.StaticBody;
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.density = 2;
+
+        Body body = world.createBody(bodyDef);
+        assetManager.attachShape(body, fixtureDef, 300, bodyName);
+        body.setAngularDamping(0.5f);
+        body.setLinearDamping(0.05f);
+        body.setUserData(entity);
+        return entity;
     }
 
     public void createBox(float x, float y, float halfWidth, float halfHeight, float angle) {
