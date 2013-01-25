@@ -2,6 +2,10 @@ package com.ggj.pulse;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
+import com.ggj.pulse.graphics.GraphicsController;
+import com.ggj.pulse.logic.LogicController;
+import com.ggj.pulse.logic.MainScreen;
+import com.ggj.pulse.logic.PhysicsController;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,12 +15,37 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
  * To change this template use File | Settings | File Templates.
  */
 public class PulseGame extends Game {
+    private ApplicationContainer applicationContainer;
+    private LogicController logicController;
+    private PhysicsController physicsController;
+    private GraphicsController graphicsController;
+
+
     @Override
     public void create() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        applicationContainer = new ApplicationContainer();
+        logicController = new LogicController();
+        physicsController = new PhysicsController();
+        graphicsController = new GraphicsController();
+
+        logicController.setApplicationContainer(applicationContainer);
+        physicsController.setApplicationContainer(applicationContainer);
+        graphicsController.setApplicationContainer(applicationContainer);
+
+        logicController.setPhysicsController(physicsController);
+
+        MainScreen screen = new MainScreen();
+        screen.setGraphicsController(graphicsController);
+        this.setScreen(screen);
+    }
+
+    @Override
+    public void render() {
+        logicController.update();
+        super.render();
     }
 
     public static void main(String[] args) {
-        new LwjglApplication(new PulseGame(), "Title0", 800, 600, true);
+        new LwjglApplication(new PulseGame(), "Spēle", 800, 600, true);
     }
 }
