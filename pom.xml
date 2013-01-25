@@ -28,7 +28,12 @@
             <groupId>com.badlogic.gdx</groupId>
             <artifactId>gdx</artifactId>
             <version>${lib.gdx.version}</version>
-
+        </dependency>
+        <dependency>
+            <groupId>com.badlogic.gdx</groupId>
+            <artifactId>gdx</artifactId>
+            <version>${lib.gdx.version}</version>
+            <classifier>natives</classifier>
         </dependency>
     </dependencies>
 </project>
