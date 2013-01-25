@@ -1,5 +1,7 @@
 package com.ggj.pulse;
 
+import com.badlogic.gdx.Game;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Lacis
@@ -8,4 +10,8 @@ package com.ggj.pulse;
  * To change this template use File | Settings | File Templates.
  */
 public class PulseGame extends Game {
+    @Override
+    public void create() {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
 }
