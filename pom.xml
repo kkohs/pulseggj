@@ -14,23 +14,23 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>com.badlogic.gdx</groupId>
+            <groupId>com.badlogic</groupId>
             <artifactId>gdx-backend-lwjgl</artifactId>
             <version>${lib.gdx.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.badlogic.gdx</groupId>
+            <groupId>com.badlogic</groupId>
             <artifactId>gdx-backend-lwjgl</artifactId>
             <version>${lib.gdx.version}</version>
             <classifier>natives</classifier>
         </dependency>
         <dependency>
-            <groupId>com.badlogic.gdx</groupId>
+            <groupId>com.badlogic</groupId>
             <artifactId>gdx</artifactId>
             <version>${lib.gdx.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.badlogic.gdx</groupId>
+            <groupId>com.badlogic</groupId>
             <artifactId>gdx</artifactId>
             <version>${lib.gdx.version}</version>
             <classifier>natives</classifier>
