@@ -1,6 +1,8 @@
 package com.ggj.pulse.graphics;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
@@ -17,12 +19,12 @@ public class GraphicsController {
     private Box2DDebugRenderer box2DDebugRenderer;
 
     public GraphicsController() {
-        camera = new PerspectiveCamera(60, 800, 600);
+        camera = new PerspectiveCamera(60, 1024, 768);
         box2DDebugRenderer = new Box2DDebugRenderer();
-        camera.translate(50, 50, 100);
+        camera.translate(50, 50, 200);
         camera.lookAt(50, 50, 0);
         camera.near = 1f;
-        camera.far = 101f;
+        camera.far = 201f;
     }
 
     public void initialize() {
@@ -30,8 +32,9 @@ public class GraphicsController {
     }
 
     public void render() {
+        Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
         camera.update();
-        box2DDebugRenderer.render(world, camera.projection);
+        box2DDebugRenderer.render(world, camera.combined);
     }
 
     public ApplicationContainer getApplicationContainer() {

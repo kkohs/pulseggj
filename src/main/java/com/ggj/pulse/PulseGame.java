@@ -6,6 +6,7 @@ import com.ggj.pulse.graphics.GraphicsController;
 import com.ggj.pulse.logic.LogicController;
 import com.ggj.pulse.graphics.MainScreen;
 import com.ggj.pulse.logic.PhysicsController;
+import com.ggj.pulse.utils.EntityFactory;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,6 +21,7 @@ public class PulseGame extends Game {
     private LogicController logicController;
     private PhysicsController physicsController;
     private GraphicsController graphicsController;
+    private EntityFactory entityFactory;
 
 
     @Override
@@ -29,12 +31,15 @@ public class PulseGame extends Game {
         logicController = new LogicController();
         physicsController = new PhysicsController();
         graphicsController = new GraphicsController();
+        entityFactory = new EntityFactory();
 
         logicController.setApplicationContainer(applicationContainer);
         physicsController.setApplicationContainer(applicationContainer);
         graphicsController.setApplicationContainer(applicationContainer);
-
+        physicsController.setEntityFactory(entityFactory);
         logicController.setPhysicsController(physicsController);
+
+        entityFactory.setWorld(physicsController.getWorld());
 
         physicsController.initialize();
         graphicsController.initialize();
@@ -51,6 +56,6 @@ public class PulseGame extends Game {
     }
 
     public static void main(String[] args) {
-        new LwjglApplication(new PulseGame(), "Spēle", 800, 600, true);
+        new LwjglApplication(new PulseGame(), "Spēle", 1024, 768, true);
     }
 }

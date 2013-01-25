@@ -21,6 +21,7 @@ public class PhysicsController {
 
     public void initialize() {
         applicationContainer.put("world", world);
+        entityFactory.createBox(0, 0, 10, 10, 3);
     }
 
     public void update() {
@@ -34,5 +35,21 @@ public class PhysicsController {
 
     public void setApplicationContainer(ApplicationContainer applicationContainer) {
         this.applicationContainer = applicationContainer;
+    }
+
+    public EntityFactory getEntityFactory() {
+        return entityFactory;
+    }
+
+    public void setEntityFactory(EntityFactory entityFactory) {
+        this.entityFactory = entityFactory;
+    }
+
+    public World getWorld() {
+        return world;
+    }
+
+    public void setWorld(World world) {
+        this.world = world;
     }
 }
