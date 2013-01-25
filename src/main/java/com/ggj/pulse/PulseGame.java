@@ -2,9 +2,8 @@ package com.ggj.pulse;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.ggj.pulse.graphics.GraphicsController;
+import com.ggj.pulse.graphics.GameScreen;
 import com.ggj.pulse.logic.LogicController;
-import com.ggj.pulse.graphics.MainScreen;
 import com.ggj.pulse.logic.PhysicsController;
 import com.ggj.pulse.utils.AssetManager;
 import com.ggj.pulse.utils.EntityFactory;
@@ -21,7 +20,7 @@ public class PulseGame extends Game {
     private ApplicationContainer applicationContainer;
     private LogicController logicController;
     private PhysicsController physicsController;
-    private GraphicsController graphicsController;
+    private GameScreen gameScreen;
     private EntityFactory entityFactory;
 
     private AssetManager assetManager;
@@ -32,25 +31,25 @@ public class PulseGame extends Game {
         applicationContainer = new ApplicationContainer();
         logicController = new LogicController();
         physicsController = new PhysicsController();
-        graphicsController = new GraphicsController();
+        gameScreen = new GameScreen();
         assetManager = new AssetManager();
         assetManager.initialize();
         entityFactory = new EntityFactory(assetManager);
 
         logicController.setApplicationContainer(applicationContainer);
         physicsController.setApplicationContainer(applicationContainer);
-        graphicsController.setApplicationContainer(applicationContainer);
+        gameScreen.setApplicationContainer(applicationContainer);
         physicsController.setEntityFactory(entityFactory);
         logicController.setPhysicsController(physicsController);
 
         entityFactory.setWorld(physicsController.getWorld());
 
         physicsController.initialize();
-        graphicsController.initialize();
+        gameScreen.initialize();
 
         //MainScreen screen = new MainScreen();
         //screen.setGraphicsController(graphicsController);
-        this.setScreen(graphicsController);
+        this.setScreen(gameScreen);
     }
 
     @Override

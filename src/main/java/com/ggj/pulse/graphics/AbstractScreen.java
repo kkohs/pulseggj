@@ -5,9 +5,8 @@ import com.badlogic.gdx.Screen;
 /**
  * @author Modris Vekmanis
  */
-@Deprecated
-public abstract class MainScreen implements Screen {
-    private GraphicsController graphicsController;
+public abstract class AbstractScreen implements Screen {
+    private GameScreen gameScreen;
 
     @Override
     public void render(float delta) {
@@ -38,11 +37,11 @@ public abstract class MainScreen implements Screen {
     public void dispose() {
     }
 
-    public GraphicsController getGraphicsController() {
-        return graphicsController;
+    public GameScreen getGameScreen() {
+        return gameScreen;
     }
 
-    public void setGraphicsController(GraphicsController graphicsController) {
-        this.graphicsController = graphicsController;
+    public void setGameScreen(GameScreen gameScreen) {
+        this.gameScreen = gameScreen;
     }
 }
