@@ -9,6 +9,12 @@ import com.ggj.pulse.entities.AbstractEntity;
  */
 public class EntityFactory {
     private World world;
+    private AssetManager assetManager;
+
+
+    public EntityFactory(AssetManager assetManager) {
+        this.assetManager = assetManager;
+    }
 
     public Body createObject(AbstractEntity entity, Shape shape) {
         BodyDef bodyDef = new BodyDef();
@@ -22,17 +28,16 @@ public class EntityFactory {
         }
 
         FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.shape = shape;
+
         fixtureDef.density = 2;
 
+
         Body body = world.createBody(bodyDef);
-        body.createFixture(fixtureDef);
+        assetManager.attachShape(body, fixtureDef, 100, "left");
+        //     body.createFixture(fixtureDef);
         body.setAngularDamping(0.5f);
         body.setLinearDamping(0.05f);
 
-        if (shape != null) {
-            shape.dispose();
-        }
 
         return body;
     }
