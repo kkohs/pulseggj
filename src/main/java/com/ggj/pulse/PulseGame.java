@@ -15,6 +15,7 @@ import com.ggj.pulse.logic.PhysicsController;
  * To change this template use File | Settings | File Templates.
  */
 public class PulseGame extends Game {
+	
     private ApplicationContainer applicationContainer;
     private LogicController logicController;
     private PhysicsController physicsController;
@@ -23,6 +24,7 @@ public class PulseGame extends Game {
 
     @Override
     public void create() {
+    	
         applicationContainer = new ApplicationContainer();
         logicController = new LogicController();
         physicsController = new PhysicsController();
