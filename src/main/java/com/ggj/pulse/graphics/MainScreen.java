@@ -5,12 +5,13 @@ import com.badlogic.gdx.Screen;
 /**
  * @author Modris Vekmanis
  */
-public class MainScreen implements Screen {
+@Deprecated
+public abstract class MainScreen implements Screen {
     private GraphicsController graphicsController;
 
     @Override
     public void render(float delta) {
-        graphicsController.render();
+        //graphicsController.render();
     }
 
     @Override

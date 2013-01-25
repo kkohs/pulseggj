@@ -11,7 +11,7 @@ import com.ggj.pulse.ApplicationContainer;
 /**
  * @author Modris Vekmanis
  */
-public class GraphicsController {
+public class GraphicsController extends MainScreen {
 
     private ApplicationContainer applicationContainer;
     private World world;
@@ -31,7 +31,8 @@ public class GraphicsController {
         world = (World) applicationContainer.get("world");
     }
 
-    public void render() {
+    @Override
+    public void render(float delta) {
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
         camera.update();
         box2DDebugRenderer.render(world, camera.combined);

@@ -4,7 +4,6 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.ggj.pulse.graphics.GraphicsController;
 import com.ggj.pulse.logic.LogicController;
-import com.ggj.pulse.graphics.MainScreen;
 import com.ggj.pulse.logic.PhysicsController;
 import com.ggj.pulse.utils.EntityFactory;
 
@@ -44,9 +43,9 @@ public class PulseGame extends Game {
         physicsController.initialize();
         graphicsController.initialize();
 
-        MainScreen screen = new MainScreen();
-        screen.setGraphicsController(graphicsController);
-        this.setScreen(screen);
+        //MainScreen screen = new MainScreen();
+        //screen.setGraphicsController(graphicsController);
+        this.setScreen(graphicsController);
     }
 
     @Override
