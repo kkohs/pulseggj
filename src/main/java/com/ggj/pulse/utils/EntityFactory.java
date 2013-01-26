@@ -79,6 +79,16 @@ public class EntityFactory {
         return entity;
     }
 
+    public AbstractEntity createCircle(float x, float y, float radius, float angle) {
+        CircleShape shape = new CircleShape();
+        shape.setRadius(radius);
+        AbstractEntity entity = new AbstractEntity();
+        entity.setPos(new Vector2(x, y));
+        entity.setBody(createObject(entity, shape));
+
+        return entity;
+    }
+
     public PlayerEntity createPlayer(float x, float y, float halfWidth, float halfHeight, float angle) {
         PlayerEntity entity = new PlayerEntity();
         entity.setPos(new Vector2(x, y));
