@@ -28,11 +28,14 @@ public class EntityFactory {
     }
 
     public Body createObject(AbstractEntity entity, Shape shape, float angle) {
+        return createObject(entity, shape, angle, false);
+    }
+    public Body createObject(AbstractEntity entity, Shape shape, float angle, boolean fixedRotation) {
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.x = entity.getPos().x;
         bodyDef.angle = angle;
         bodyDef.position.y = entity.getPos().y;
-        bodyDef.fixedRotation = true;
+        bodyDef.fixedRotation = fixedRotation;
         if (entity.isStatic()) {
             bodyDef.type = BodyDef.BodyType.StaticBody;
         } else {
@@ -105,7 +108,7 @@ public class EntityFactory {
         CircleShape shape = new CircleShape();
         shape.setRadius(4);
 
-        Body body = createObject(entity, shape, 0);
+        Body body = createObject(entity, shape, 0, true);
         entity.setBody(body);
 
         BodyDef centerDef = new BodyDef();
@@ -126,7 +129,7 @@ public class EntityFactory {
         createRope(entity,new Vector2().set(-70, 48), 1);
         createRope(entity, new Vector2().set(126, -19), 2);
         createRope(entity, new Vector2().set(54, 112), 3);
-        createRope(entity, new Vector2().set(68, 97), 4);
+       // createRope(entity, new Vector2().set(68, 97), 4);
         createRope(entity, new Vector2().set(155, 70), 5);
 
 
@@ -159,7 +162,7 @@ public class EntityFactory {
             e.setPos(vec.tmp().mul(i * width).add(wallPos));
             PolygonShape shape = new PolygonShape();
             shape.setAsBox(width, height);
-            e.setBody(createObject(e, shape, vec.angle() * MathUtils.degreesToRadians));
+            e.setBody(createObject(e, shape, vec.angle() * MathUtils.degreesToRadians, true));
             e.getBody().setUserData(e);
             e.setGrpIndex(index);
 
@@ -169,7 +172,7 @@ public class EntityFactory {
             world.createJoint(revoluteJointDef);
             previous = e.getBody();
 
-            bloodVesselEntity.getChain().add(previous);
+            bloodVesselEntity.getChain().add(e);
 
         }
 

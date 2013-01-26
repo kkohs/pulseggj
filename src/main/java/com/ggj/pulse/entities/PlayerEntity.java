@@ -1,7 +1,6 @@
 package com.ggj.pulse.entities;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.joints.RopeJoint;
 
 import java.util.ArrayList;
@@ -62,11 +61,11 @@ public class PlayerEntity extends ActionEntity {
             if(centerJoint.getMaxLength() > 2)
            centerJoint.setMaxLength(centerJoint.getMaxLength() - .8f);
             for(BloodVesselEntity e: anchors) {
-                for(Body body : e.getChain()) {
-                    body.setLinearVelocity(0,0);
+                for(BloodVesselEntity body : e.getChain()) {
+                    body.getBody().setLinearVelocity(0, 0);
                 }
             }
-            getBody().setLinearVelocity(0,0);
+            getBody().setLinearVelocity(0, 0);
         }  else {
 
             centerJoint.setMaxLength(100);

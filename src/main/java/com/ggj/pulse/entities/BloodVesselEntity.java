@@ -1,7 +1,6 @@
 package com.ggj.pulse.entities;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.joints.RopeJoint;
 import com.ggj.pulse.ApplicationContainer;
@@ -21,7 +20,7 @@ public class BloodVesselEntity extends ActionEntity {
     private float health;
     private float distance;
 
-    private LinkedList<Body> chain = new LinkedList<>();
+    private LinkedList<BloodVesselEntity> chain = new LinkedList<>();
 
 
     private int grpIndex;
@@ -82,11 +81,11 @@ public class BloodVesselEntity extends ActionEntity {
         this.grpIndex = grpIndex;
     }
 
-    public LinkedList<Body> getChain() {
+    public LinkedList<BloodVesselEntity> getChain() {
         return chain;
     }
 
-    public void setChain(LinkedList<Body> chain) {
+    public void setChain(LinkedList<BloodVesselEntity> chain) {
         this.chain = chain;
     }
 
@@ -102,7 +101,7 @@ public class BloodVesselEntity extends ActionEntity {
             parent.getAnchors().remove(this);
         } else if(health < 0) {
            World world = (World) applicationContainer.get("physicsWorld");
-            world.destroyBody(chain.removeFirst());
+            world.destroyBody(chain.removeFirst().getBody());
         }
 
 
