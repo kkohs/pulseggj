@@ -68,7 +68,7 @@ public class BackgroundEntity extends ActionEntity {
     }
 
     @Override
-    float getBodySize() {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+    public float getBodySize() {
+        return 10;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

@@ -20,6 +20,8 @@ public abstract class AbstractEntity {
     private Body body;
     private int renderOrder = 5;
 
+    private float bodySize;
+
     public void render(SpriteBatch batch, Camera camera, AssetManager assetManager, float scaleX, float scaleY) {
     }
 
@@ -66,6 +68,11 @@ public abstract class AbstractEntity {
         this.renderOrder = renderOrder;
     }
 
-    abstract float getBodySize();
+    public float getBodySize() {
+        return bodySize;
+    }
 
+    public void setBodySize(float bodySize) {
+        this.bodySize = bodySize;
+    }
 }
