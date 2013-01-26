@@ -39,7 +39,7 @@ public class InputController extends InputAdapter {
         camera.unproject(this.pointer);
         Gdx.app.log("Mouse Pointer" , this.pointer.toString());
         PlayerEntity playerEntity = (PlayerEntity) applicationContainer.get("player");
-
+         if (playerEntity.isDead())  return true;
         this.pointer.set(screenX, screenY,0);
         camera.unproject(this.pointer);
 
@@ -59,6 +59,11 @@ public class InputController extends InputAdapter {
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
+        PlayerEntity playerEntity = (PlayerEntity) applicationContainer.get("player");
+        if (playerEntity.isDead()) {
+        touchUp(0,0, 0, Input.Buttons.LEFT);
+            return true;
+        }
         Camera camera = (Camera) applicationContainer.get("gameCam");
         if (mouseJoint != null) {
             camera.unproject(this.pointer.set(screenX, screenY, 0));

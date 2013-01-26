@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.joints.RopeJointDef;
 import com.ggj.pulse.ApplicationContainer;
 import com.ggj.pulse.entities.*;
 import com.ggj.pulse.graphics.GameScreen;
+import com.ggj.pulse.logic.PhysicsController;
 
 /**
  * @author Modris Vekmanis
@@ -20,10 +21,12 @@ public class EntityFactory {
     private AssetManager assetManager;
     private GameScreen gameScreen;
     private ApplicationContainer applicationContainer;
+    private PhysicsController physicsController;
 
-    public EntityFactory(AssetManager assetManager, ApplicationContainer applicationContainer) {
+    public EntityFactory(AssetManager assetManager, ApplicationContainer applicationContainer, PhysicsController physicsController) {
         this.assetManager = assetManager;
         this.applicationContainer = applicationContainer;
+        this.physicsController = physicsController;
     }
 
     public Body createObject(AbstractEntity entity, Shape shape, float angle) {
@@ -68,7 +71,7 @@ public class EntityFactory {
         bodyDef.type = BodyDef.BodyType.StaticBody;
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.density = 2;
-        entity.setTexture(new Sprite(assetManager.get("textures/levelProgressReport.jpg", Texture.class), 1600, 900));
+            entity.setTexture(new Sprite(assetManager.get(AssetManager.BACK_GROUND, Texture.class),1600,900));
         Body body = world.createBody(bodyDef);
         assetManager.attachShape(body, fixtureDef, 400, bodyName);
         body.setAngularDamping(0.5f);
@@ -82,13 +85,14 @@ public class EntityFactory {
     public AbstractEntity createBox(float x, float y, float halfWidth, float halfHeight, float angle) {
         Shape shape = new PolygonShape();
         ((PolygonShape) shape).setAsBox(halfWidth, halfHeight);
-        RectangleEntity entity = new RectangleEntity();
+        RectangleEntity entity = new RectangleEntity(applicationContainer);
         entity.setPos(new Vector2(x, y));
         entity.setBody(createObject(entity, shape, 0));
         entity.setW(2 * halfWidth);
         entity.setH(2 * halfHeight);
         entity.getBody().setTransform(entity.getPos().x, entity.getPos().y, angle);
 
+        applicationContainer.addToSpawn(entity);
         gameScreen.getVisibleEntities().add(entity);
 
         return entity;
@@ -97,7 +101,7 @@ public class EntityFactory {
     public AbstractEntity createCircle(float x, float y, float radius, float angle) {
         CircleShape shape = new CircleShape();
         shape.setRadius(radius);
-        CircleEntity entity = new CircleEntity();
+        CircleEntity entity = new CircleEntity(applicationContainer);
         entity.setPos(new Vector2(x, y));
         entity.setBody(createObject(entity, shape, 0));
         entity.setW(radius);
@@ -105,20 +109,40 @@ public class EntityFactory {
         entity.getBody().setTransform(entity.getPos().x, entity.getPos().y, angle);
 
         gameScreen.getVisibleEntities().add(entity);
-
+        applicationContainer.addToSpawn(entity);
         return entity;
     }
 
     public PlayerEntity createPlayer(float x, float y, float halfWidth, float halfHeight, float angle) {
-        PlayerEntity entity = new PlayerEntity();
+        PlayerEntity entity = new PlayerEntity(applicationContainer);
         entity.setPos(new Vector2(x, y));
         entity.setStatic(false);
-        CircleShape shape = new CircleShape();
-        shape.setRadius(4);
 
-        Body body = createObject(entity, shape, 0, true, 200);
+
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.position.x = entity.getPos().x;
+        bodyDef.angle = angle;
+        bodyDef.position.y = entity.getPos().y;
+        bodyDef.fixedRotation = true;
+        if (entity.isStatic()) {
+            bodyDef.type = BodyDef.BodyType.StaticBody;
+        } else {
+            bodyDef.type = BodyDef.BodyType.DynamicBody;
+        }
+
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.density = 200;
+
+
+        Body body = world.createBody(bodyDef);
+         assetManager.attachShape(body, fixtureDef, 10, "heart");
+       // body.createFixture(fixtureDef);
+        body.setAngularDamping(0.5f);
+        body.setLinearDamping(0.05f);
+        Fixture f = body.getFixtureList().get(0);
+
         entity.setBody(body);
-
+       entity.setSprite(new Sprite(assetManager.get("textures/pulseHeart.png", Texture.class)));
         BodyDef centerDef = new BodyDef();
         centerDef.position.set(x, y);
         Body center = world.createBody(centerDef);
@@ -128,7 +152,7 @@ public class EntityFactory {
         ropeJointDef.bodyB = body;
 
         entity.setCenterJoint((RopeJoint) world.createJoint(ropeJointDef));
-
+        gameScreen.getVisibleEntities().add(entity);
         return entity;
     }
 
@@ -155,27 +179,29 @@ public class EntityFactory {
 
         Body wallBody = world.createBody(wallPoint);
         float dist = entity.getPos().dst(wallPos);
-        float width = 1;
+        float width = 2;
         float height = 1f;
 
         Vector2 vec = entity.getPos();
         vec.sub(wallPos).nor();
-        int count = (int) ((dist / width) / 2);
+        int count = (int) ((dist / width) );
 
         Body previous = wallBody;
-
-
+        bloodVesselEntity.setWidth(width);
+        bloodVesselEntity.setHeight(height);
+        bloodVesselEntity.setSprite(new Sprite(assetManager.get(AssetManager.CHAIN_TEXTURE, Texture.class)));
+         bloodVesselEntity.setRender(true);
         for (int i = 1; i < count; i++) {
             BloodVesselEntity e = new BloodVesselEntity(applicationContainer);
             e.setPos(vec.tmp().mul(i * width).add(wallPos));
             PolygonShape shape = new PolygonShape();
             shape.setAsBox(width, height);
-            e.setBody(createObject(e, shape, vec.angle() * MathUtils.degreesToRadians, true, 1));
+            e.setBody(createObject(e, shape, vec.angle() * MathUtils.degreesToRadians, false,1));
             e.getBody().setUserData(e);
             e.setGrpIndex(index);
 
             RevoluteJointDef revoluteJointDef = new RevoluteJointDef();
-            revoluteJointDef.initialize(previous, e.getBody(), previous.getPosition());
+            revoluteJointDef.initialize(previous, e.getBody(), new Vector2(previous.getPosition()).add(vec.tmp().mul(width / 2.0f)));
             revoluteJointDef.collideConnected = true;
             world.createJoint(revoluteJointDef);
             previous = e.getBody();

@@ -36,6 +36,7 @@ public class MapLoader {
        // entityFactory.createRope(entity);
         for(BloodVesselEntity vesselEntity : entity.getAnchors()) {
             physicsController.getActionEntities().add(vesselEntity);
+            screen.getVisibleEntities().add(vesselEntity);
         }
     }
 

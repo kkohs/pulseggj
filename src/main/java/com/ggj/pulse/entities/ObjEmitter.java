@@ -35,6 +35,7 @@ public class ObjEmitter extends ActionEntity {
             } else {
                 entity = entityFactory.createCircle(getPos().x, getPos().y, random.nextFloat() * (maxSize - minSize) + minSize, random.nextFloat() * 10);
             }
+
             Vector2 vel = new Vector2(vT);
             vel.mul((random.nextFloat() * maxOffset) - maxOffset / 2);
             vel.add(getDirection());

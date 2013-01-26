@@ -20,6 +20,10 @@ import java.util.HashMap;
 public class AssetManager extends com.badlogic.gdx.assets.AssetManager {
     private HashMap<String, Sprite> spriteHashMap;
     private static final String TEXTURES = "textures/textures.pack";
+    public static final String CHAIN_TEXTURE = "textures/chain.png";
+    public static final String ENEMY_ONE = "textures/enemy1.png";
+    public static final String ENEMY_TWO = "textures/enemy2.png";
+    public static final String BACK_GROUND = "textures/pulseLevelBackground.png";
 
     private BodyEditorLoader bodyEditorLoader;
 
@@ -28,9 +32,11 @@ public class AssetManager extends com.badlogic.gdx.assets.AssetManager {
         bodyEditorLoader = new BodyEditorLoader(Gdx.files.internal("map"));
 
         //load("TEDTURENAMVE", Texture.class);
-        this.load("textures/New Bitmap Image.bmp", Texture.class);
-        this.load("textures/levelProgressReport.jpg", Texture.class);
-        this.load("textures/New Bitmap Image (2).png", Texture.class);
+        this.load(ENEMY_TWO, Texture.class);
+        this.load(BACK_GROUND, Texture.class);
+        this.load(ENEMY_ONE, Texture.class);
+        this.load("textures/pulseHeart.png", Texture.class);
+        this.load(CHAIN_TEXTURE, Texture.class);
         this.finishLoading();
     }
 

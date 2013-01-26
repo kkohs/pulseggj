@@ -28,6 +28,8 @@ public class LogicController {
 
         applicationContainer.setCurrTime(System.currentTimeMillis());
         physicsController.update();
+        physicsController.getActionEntities().addAll(applicationContainer.getActionEntitiesToSpawn());
+        applicationContainer.getActionEntitiesToSpawn().clear();
     }
 
     public ApplicationContainer getApplicationContainer() {
