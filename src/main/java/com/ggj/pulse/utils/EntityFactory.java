@@ -95,6 +95,10 @@ public class EntityFactory {
         return entity;
     }
 
+    public void attachRopes(PlayerEntity entity) {
+
+    }
+
 
     public World getWorld() {
         return world;

@@ -1,6 +1,7 @@
 package com.ggj.pulse.entities;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,6 +13,7 @@ import com.badlogic.gdx.math.Vector2;
 public class AbstractEntity {
     private Vector2 pos;
     private boolean isStatic = false;
+    private Body body;
 
     public Vector2 getPos() {
         return pos;
@@ -27,5 +29,13 @@ public class AbstractEntity {
 
     public void setStatic(boolean aStatic) {
         isStatic = aStatic;
+    }
+
+    public Body getBody() {
+        return body;
+    }
+
+    public void setBody(Body body) {
+        this.body = body;
     }
 }
