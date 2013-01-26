@@ -131,11 +131,11 @@ public class EntityFactory {
 
     public void attachRopes(PlayerEntity entity) {
         Vector2 pos = new Vector2();
-        createRope(entity, new Vector2().set(-70, 48), 1);
-        createRope(entity, new Vector2().set(126, -19), 2);
-        createRope(entity, new Vector2().set(54, 112), 3);
+        createRope(entity, new Vector2().set(-84, 49), 1);
+        createRope(entity, new Vector2().set(212, 72), 2);
+        createRope(entity, new Vector2().set(72, 122), 3);
        // createRope(entity, new Vector2().set(68, 97), 4);
-        createRope(entity, new Vector2().set(155, 70), 5);
+        createRope(entity, new Vector2().set(166, -13), 5);
 
 
     }
