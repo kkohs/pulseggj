@@ -3,6 +3,7 @@ package com.ggj.pulse.utils;
 import com.badlogic.gdx.math.Vector2;
 import com.ggj.pulse.ApplicationContainer;
 import com.ggj.pulse.entities.AbstractEntity;
+import com.ggj.pulse.entities.BloodVesselEntity;
 import com.ggj.pulse.entities.ObjEmitter;
 import com.ggj.pulse.entities.PlayerEntity;
 import com.ggj.pulse.logic.PhysicsController;
@@ -20,7 +21,7 @@ public class MapLoader {
         AbstractEntity pipes = entityFactory.createStaticObject(30, 40, 10, 10, 3, "pipes");
         applicationContainer.put("gameWorld", world);
         applicationContainer.put("pipes", pipes);
-        createObjEmitters();
+       createObjEmitters();
         createPlayer();
     }
 
@@ -29,6 +30,10 @@ public class MapLoader {
         entityFactory.attachRopes(entity);
         applicationContainer.put("player", entity);
         physicsController.getActionEntities().add(entity);
+        
+        for(BloodVesselEntity vesselEntity : entity.getAnchors()) {
+            physicsController.getActionEntities().add(vesselEntity);
+        }
     }
 
 

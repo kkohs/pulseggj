@@ -9,7 +9,6 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
 import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
-import com.badlogic.gdx.physics.box2d.joints.RopeJoint;
 import com.ggj.pulse.ApplicationContainer;
 import com.ggj.pulse.entities.PlayerEntity;
 
@@ -39,10 +38,6 @@ public class InputController extends InputAdapter {
         Gdx.app.log("Mouse Pointer" , this.pointer.toString());
         PlayerEntity playerEntity = (PlayerEntity) applicationContainer.get("player");
 
-        for(RopeJoint ropeJoint : playerEntity.getAnchors()) {
-            ropeJoint.setMaxLength(1000);
-        }
-
         this.pointer.set(screenX, screenY,0);
         camera.unproject(this.pointer);
 
@@ -69,6 +64,7 @@ public class InputController extends InputAdapter {
         return false;
     }
 
+    //TODO mouse joint 2button bug
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         World world = (World) applicationContainer.get("physicsWorld");
