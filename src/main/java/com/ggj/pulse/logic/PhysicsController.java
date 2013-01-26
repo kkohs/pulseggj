@@ -9,6 +9,7 @@ import com.ggj.pulse.entities.ActionEntity;
 import com.ggj.pulse.entities.BloodVesselEntity;
 import com.ggj.pulse.utils.EntityFactory;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class PhysicsController {
     private ApplicationContainer applicationContainer;
     private World world;
     private EntityFactory entityFactory;
-    private List<ActionEntity> actionEntities = new LinkedList<>();
+    private List<ActionEntity> actionEntities = new ArrayList<>();
 
     private float step = (float) (1.0 / 60.f);
 

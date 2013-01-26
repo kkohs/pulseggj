@@ -3,6 +3,8 @@ package com.ggj.pulse.logic;
 import com.ggj.pulse.ApplicationContainer;
 import com.ggj.pulse.entities.AbstractEntity;
 import com.ggj.pulse.entities.ActionEntity;
+import com.ggj.pulse.entities.CircleEntity;
+import com.ggj.pulse.entities.RectangleEntity;
 import com.ggj.pulse.graphics.GameScreen;
 
 /**
@@ -18,6 +20,15 @@ public class LogicController {
         for (AbstractEntity entity : applicationContainer.getEntitiesToDestroy()) {
             if (entity instanceof ActionEntity) {
                 physicsController.getActionEntities().remove(entity);
+            }
+
+            if (entity instanceof CircleEntity || entity instanceof RectangleEntity) {
+                if(entity.getBody() == null) {
+                    continue;
+                }
+                entity.getBody().setUserData(null);
+                physicsController.getWorld().destroyBody(entity.getBody());
+                entity.setBody(null);
             }
 
             if (entity.isRenderable()) {

@@ -22,25 +22,30 @@ public class ObjEmitter extends ActionEntity {
     private float maxOffset = 3;
 
     private long nextSpawn = 0;
-    private long maxCdTime = 10000;
+    private long maxCdTime = 15000;
 
     @Override
     public void update() {
         long t = applicationContainer.getCurrTime();
         if (t >= nextSpawn) {
-            if (maxCdTime > 1000) maxCdTime -= 500;
+            if (maxCdTime > 2000) maxCdTime -= 500;
+            float size = 0;
             AbstractEntity entity;
             if (random.nextBoolean()) {
-                entity = entityFactory.createBox(getPos().x, getPos().y,
-                        random.nextFloat() * (maxSize - minSize) + minSize, random.nextFloat() * (maxSize - minSize) + minSize, random.nextFloat() * 10);
+                float dx = random.nextFloat() * (maxSize - minSize) + minSize;
+                float dy = random.nextFloat() * (maxSize - minSize) + minSize;
+                size = (dx + dy) / 2;
+                entity = entityFactory.createBox(getPos().x, getPos().y, dx, dy, random.nextFloat() * 10);
             } else {
-                entity = entityFactory.createCircle(getPos().x, getPos().y, random.nextFloat() * (maxSize * 1.5f - minSize) + minSize, random.nextFloat() * 10);
+                size = random.nextFloat() * (maxSize * 1.5f - minSize) + minSize;
+                entity = entityFactory.createCircle(getPos().x, getPos().y, size, random.nextFloat() * 10);
             }
+            size *= .05;
 
             Vector2 vel = new Vector2(vT);
             vel.mul((random.nextFloat() * maxOffset) - maxOffset / 2);
             vel.add(getDirection());
-            vel.mul(random.nextFloat() * speedModifier);
+            vel.mul(random.nextFloat() * speedModifier / size);
             entity.getBody().applyForceToCenter(vel);
             nextSpawn = t + (long) (random.nextFloat() * (float) maxCdTime);
         }
