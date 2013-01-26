@@ -8,6 +8,8 @@ import com.ggj.pulse.graphics.GameScreen;
 import com.ggj.pulse.logic.InputController;
 import com.ggj.pulse.logic.LogicController;
 import com.ggj.pulse.logic.PhysicsController;
+import com.ggj.pulse.physics.GameContactFilter;
+import com.ggj.pulse.physics.GameContactListener;
 import com.ggj.pulse.utils.AssetManager;
 import com.ggj.pulse.utils.EntityFactory;
 import com.ggj.pulse.utils.MapLoader;
@@ -41,7 +43,7 @@ public class PulseGame extends Game {
         gameScreen = new GameScreen();
         assetManager = new AssetManager();
         assetManager.initialize();
-        entityFactory = new EntityFactory(assetManager,applicationContainer);
+        entityFactory = new EntityFactory(assetManager, applicationContainer);
 
         logicController.setApplicationContainer(applicationContainer);
         physicsController.setApplicationContainer(applicationContainer);
@@ -55,6 +57,9 @@ public class PulseGame extends Game {
 
         physicsController.initialize();
         gameScreen.initialize();
+
+        physicsController.getWorld().setContactListener(new GameContactListener());
+        physicsController.getWorld().setContactFilter(new GameContactFilter());
 
         MapLoader mapLoader = new MapLoader();
         mapLoader.setEntityFactory(entityFactory);
