@@ -43,6 +43,7 @@ public class ObjEmitter extends ActionEntity {
             } else {
                 size = random.nextFloat() * (maxSize * 1.5f - minSize) + minSize;
                 entity = entityFactory.createCircle(getPos().x, getPos().y, size, random.nextFloat() * 10);
+                ((CircleEntity) entity).setText(random.nextInt(3));
             }
             size *= .05;
 

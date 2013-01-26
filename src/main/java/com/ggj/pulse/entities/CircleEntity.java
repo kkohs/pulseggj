@@ -14,6 +14,7 @@ import com.ggj.pulse.utils.AssetManager;
 public class CircleEntity extends ActionEntity {
     private static Vector3 coords = new Vector3();
     private static Sprite sprite = new Sprite();
+    private int text = 0;
     private float w, h;
 
     private ApplicationContainer applicationContainer;
@@ -27,7 +28,23 @@ public class CircleEntity extends ActionEntity {
     public void render(SpriteBatch batch, Camera camera, AssetManager assetManager, float scaleX, float scaleY) {
         coords.set(getPos().x - w, getPos().y - h, 0);
         camera.project(coords);
-        sprite.setTexture(assetManager.get(AssetManager.ENEMY_TWO, Texture.class));
+
+        switch (text) {
+            case 0:{
+                sprite.setTexture(assetManager.get(AssetManager.ENEMY_TWO, Texture.class));
+                break;
+            }
+            case 1:{
+                sprite.setTexture(assetManager.get(AssetManager.ENEMY_THREE, Texture.class));
+                break;
+            }
+            case 2:{
+                sprite.setTexture(assetManager.get(AssetManager.ENEMY_FOUR, Texture.class));
+                break;
+            }
+        }
+
+
         sprite.setSize(w * scaleX * 2, h * scaleY * 2);
 
         sprite.setU(0);
@@ -35,10 +52,9 @@ public class CircleEntity extends ActionEntity {
         sprite.setU2(1);
         sprite.setV2(1);
 
-        sprite.setOrigin(w * scaleX , h * scaleY );
+        sprite.setOrigin(w * scaleX, h * scaleY);
         sprite.setRotation((float) Math.toDegrees(getBody().getAngle()));
         sprite.setPosition(coords.x, coords.y);
-
 
         sprite.draw(batch);
     }
@@ -61,8 +77,16 @@ public class CircleEntity extends ActionEntity {
 
     @Override
     public void update() {
-        if(getPos().y < -90f) {
+        if (getPos().y < -90f) {
             applicationContainer.destroyEntity(this);
         }
+    }
+
+    public int getText() {
+        return text;
+    }
+
+    public void setText(int text) {
+        this.text = text;
     }
 }
