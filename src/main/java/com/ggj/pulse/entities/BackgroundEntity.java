@@ -1,5 +1,6 @@
 package com.ggj.pulse.entities;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -53,7 +54,7 @@ public class BackgroundEntity extends ActionEntity {
         if (!draw) return;
         coords.set(getPos().x - w / 2, getPos().y - h / 2, 0);
         camera.project(coords);
-        sprite.setSize(1600, 900);
+        sprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         sprite.setU(0);
         sprite.setV(0);

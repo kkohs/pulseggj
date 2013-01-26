@@ -1,5 +1,6 @@
 package com.ggj.pulse.utils;
 
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
@@ -161,7 +162,7 @@ public class EntityFactory {
     }
 
     public void attachRopes(PlayerEntity entity) {
-        Vector2 pos = new Vector2();
+        Camera camera = (Camera) applicationContainer.get("gameCam");
         createRope(entity, new Vector2().set(-96, 49), 1);
         createRope(entity, new Vector2().set(204, 79), 2);
         createRope(entity, new Vector2().set(73, 126), 3);

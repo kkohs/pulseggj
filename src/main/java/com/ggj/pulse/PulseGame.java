@@ -96,10 +96,10 @@ public class PulseGame extends Game {
     public static void main(String[] args) {
         LwjglApplicationConfiguration configuration = new LwjglApplicationConfiguration();
         configuration.resizable = false;
-        configuration.width = 1600;
-        configuration.height = 900;
+        configuration.width = 1900;
+        configuration.height = 1050;
         configuration.useGL20 = true;
-        configuration.fullscreen = true;
+        configuration.fullscreen = false;
         new LwjglApplication(new PulseGame(), configuration);
     }
 }

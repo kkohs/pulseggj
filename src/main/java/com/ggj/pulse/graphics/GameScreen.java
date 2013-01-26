@@ -49,7 +49,7 @@ public class GameScreen extends AbstractScreen {
 
     public GameScreen() {
 
-        camera = new PerspectiveCamera(60, 1600, 900);
+        camera = new PerspectiveCamera(60, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         box2DDebugRenderer = new Box2DDebugRenderer();
         camera.translate(50, 50, 200);
         camera.lookAt(50, 50, 0);
@@ -100,20 +100,22 @@ public class GameScreen extends AbstractScreen {
             }
             BitmapFont font = new BitmapFont();
             font.scale(1);
-            font.draw(batch, "Time alive: " + TimeUnit.MILLISECONDS.toSeconds(timeAlive), 50, 880);
+            font.draw(batch, "Time alive: " + TimeUnit.MILLISECONDS.toSeconds(timeAlive), 50, Gdx.graphics.getHeight() - 20);
 
             if (player.isDead()) {
                 font = new BitmapFont();
                 font.scale(10);
 
-                font.draw(batch, "DEAD", 600, 500);
+                font.draw(batch, "DEAD", Gdx.graphics.getWidth() / 2 - font.getBounds("DEAD").width / 2, Gdx.graphics.getHeight() / 2 + font.getBounds("DEAD").height + 100);
                 font = new BitmapFont();
                 font.scale(1);
-                font.draw(batch, "Survived for : " + TimeUnit.MILLISECONDS.toSeconds(timeAlive) + " seconds!!", 640, 320);
+                String text = "Survived for : " + TimeUnit.MILLISECONDS.toSeconds(timeAlive) + " seconds!!";
+                font.draw(batch, text, Gdx.graphics.getWidth() / 2 - font.getBounds(text).width / 2, Gdx.graphics.getHeight() / 2);
 
                 font = new BitmapFont();
                 font.scale(2);
-                font.draw(batch, "Press space for new game!", 570, 260);
+                text = "Press space for new game!";
+                font.draw(batch, "Press space for new game!", Gdx.graphics.getWidth() / 2 - font.getBounds(text).width / 2, Gdx.graphics.getHeight() / 2 - 100);
 
 
             } else {

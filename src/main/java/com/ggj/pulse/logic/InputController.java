@@ -36,6 +36,7 @@ public class InputController extends InputAdapter {
         Camera camera = (Camera) applicationContainer.get("gameCam");
         World world = (World) applicationContainer.get("physicsWorld");
         this.pointer.set(screenX, screenY, 0);
+        Gdx.app.log("Mouse Pointer screen", this.pointer.toString());
         camera.unproject(this.pointer);
         Gdx.app.log("Mouse Pointer", this.pointer.toString());
         PlayerEntity playerEntity = (PlayerEntity) applicationContainer.get("player");
