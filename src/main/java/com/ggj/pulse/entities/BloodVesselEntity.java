@@ -34,6 +34,8 @@ public class BloodVesselEntity extends ActionEntity {
     private Vector2 anchorPoint;
     private RopeJoint joint;
 
+    private float lastHealth;
+
     private boolean soundPlayed = false;
     private Sound spring;
 
@@ -131,12 +133,16 @@ public class BloodVesselEntity extends ActionEntity {
         this.height = height;
     }
 
+    public float getLastHealth() {
+        return lastHealth;
+    }
+
     @Override
     public void update() {
         float currentDistance = anchorPoint.dst(parent.getPos());
+        lastHealth = health;
         if (currentDistance > distance + 15) {
             health -= 0.001 * currentDistance;
-
         }
         if (health < 0 && chain.isEmpty()) {
             applicationContainer.destroyEntity(this);
