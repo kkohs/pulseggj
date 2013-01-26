@@ -27,6 +27,12 @@ public class PlayerEntity extends ActionEntity {
     private Sprite sprite;
     private boolean shouldMove;
 
+    private int pulse = 45;
+    private int pulseTime = 0;
+    private int pulseSpeed = 3;
+    private boolean hasPulse = true;
+
+
     private boolean dead;
 
     private RopeJoint centerJoint;
@@ -91,30 +97,32 @@ public class PlayerEntity extends ActionEntity {
 
     @Override
     public void update() {
-        if(getPos().y < -90f) {
+        pulseTime++;
+
+        if (getPos().y < -90f) {
             applicationContainer.destroyEntity(this);
         }
-        if(anchors.isEmpty())  {
+        if (anchors.isEmpty()) {
             dead = true;
             World world = (World) applicationContainer.get("physicsWorld");
-            if(centerJoint != null){
-            world.destroyJoint(centerJoint);
-             getBody().setFixedRotation(false);
-            centerJoint = null;
+            if (centerJoint != null) {
+                world.destroyJoint(centerJoint);
+                getBody().setFixedRotation(false);
+                centerJoint = null;
             }
             return;
         }
 
-        if(!shouldMove) {
-            if(centerJoint.getMaxLength() > 2)
-           centerJoint.setMaxLength(centerJoint.getMaxLength() - .8f);
-            for(BloodVesselEntity e: anchors) {
-                for(BloodVesselEntity body : e.getChain()) {
+        if (!shouldMove) {
+            if (centerJoint.getMaxLength() > 2)
+                centerJoint.setMaxLength(centerJoint.getMaxLength() - .8f);
+            for (BloodVesselEntity e : anchors) {
+                for (BloodVesselEntity body : e.getChain()) {
                     body.getBody().setLinearVelocity(0, 0);
                 }
             }
             getBody().setLinearVelocity(0, 0);
-        }  else {
+        } else {
 
             centerJoint.setMaxLength(100);
         }
@@ -122,22 +130,34 @@ public class PlayerEntity extends ActionEntity {
 
     @Override
     public void render(SpriteBatch batch, Camera camera, AssetManager assetManager, float scaleX, float scaleY) {
-        if(!render) return;
+        if (!render) return;
         coords.set(getPos().x - 20, getPos().y - 20, 0);
         camera.project(coords);
-        sprite.setSize(20 * scaleX * 2, 20 * scaleY * 2);
+        if (hasPulse) {
+            sprite.setSize(20 * scaleX * 2 - (pulseTime % pulse) / pulseSpeed, 20 * scaleY * 2 - (pulseTime % pulse) / pulseSpeed);
+        } else {
+            sprite.setSize(20 * scaleX * 2, 20 * scaleY * 2);
+        }
 
         sprite.setU(0);
         sprite.setV(0);
         sprite.setU2(1);
         sprite.setV2(1);
 
-        sprite.setOrigin(20 * scaleX , 20 * scaleY );
+        sprite.setOrigin(20 * scaleX, 20 * scaleY);
         sprite.setRotation((float) Math.toDegrees(getBody().getAngle()));
         sprite.setPosition(coords.x, coords.y);
 
 
         sprite.draw(batch);
 
+    }
+
+    public void setPulseSpeed(int pulseSpeed) {
+        this.pulseSpeed = pulseSpeed;
+    }
+
+    public void setHasPulse(boolean hasPulse) {
+        this.hasPulse = hasPulse;
     }
 }
