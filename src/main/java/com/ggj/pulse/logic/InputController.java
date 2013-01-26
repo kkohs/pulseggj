@@ -105,6 +105,10 @@ public class InputController extends InputAdapter {
         if (playerEntity != null && playerEntity.isDead() && keycode == Input.Keys.SPACE) {
             applicationContainer.setNewGame(true);
         }
+
+        if (keycode == Input.Keys.ESCAPE) {
+            Gdx.app.exit();
+        }
         return true;
     }
 }
