@@ -13,7 +13,7 @@ import com.ggj.pulse.utils.AssetManager;
  * Time: 20:42
  * To change this template use File | Settings | File Templates.
  */
-public class AbstractEntity {
+public abstract class AbstractEntity {
     private Vector2 pos;
     private boolean isStatic = false;
     private boolean renderable = false;
@@ -65,4 +65,7 @@ public class AbstractEntity {
     public void setRenderOrder(int renderOrder) {
         this.renderOrder = renderOrder;
     }
+
+    abstract float getBodySize();
+
 }

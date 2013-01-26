@@ -91,4 +91,9 @@ public class ObjEmitter extends ActionEntity {
     public void setMaxCdTime(long maxCdTime) {
         this.maxCdTime = maxCdTime;
     }
+
+    @Override
+    float getBodySize() {
+        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 }

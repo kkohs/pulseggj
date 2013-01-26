@@ -198,8 +198,8 @@ public class EntityFactory {
         for (int i = 1; i < count; i++) {
             BloodVesselEntity e = new BloodVesselEntity(applicationContainer);
             e.setPos(vec.tmp().mul(i * width).add(wallPos));
-            PolygonShape shape = new PolygonShape();
-            shape.setAsBox(width, height);
+            CircleShape shape = new CircleShape();
+            shape.setRadius(4);
             e.setBody(createObject(e, shape, vec.angle() * MathUtils.degreesToRadians, false, 1));
             e.getBody().setUserData(e);
             e.setGrpIndex(index);

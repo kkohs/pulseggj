@@ -174,4 +174,9 @@ public class BloodVesselEntity extends ActionEntity {
             }
         }
     }
+
+    @Override
+    float getBodySize() {
+        return width * height;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 }

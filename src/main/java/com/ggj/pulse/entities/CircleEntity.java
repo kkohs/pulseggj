@@ -30,15 +30,15 @@ public class CircleEntity extends ActionEntity {
         camera.project(coords);
 
         switch (text) {
-            case 0:{
+            case 0: {
                 sprite.setTexture(assetManager.get(AssetManager.ENEMY_TWO, Texture.class));
                 break;
             }
-            case 1:{
+            case 1: {
                 sprite.setTexture(assetManager.get(AssetManager.ENEMY_THREE, Texture.class));
                 break;
             }
-            case 2:{
+            case 2: {
                 sprite.setTexture(assetManager.get(AssetManager.ENEMY_FOUR, Texture.class));
                 break;
             }
@@ -57,6 +57,11 @@ public class CircleEntity extends ActionEntity {
         sprite.setPosition(coords.x, coords.y);
 
         sprite.draw(batch);
+    }
+
+    @Override
+    float getBodySize() {
+        return 0;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     public float getH() {

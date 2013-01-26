@@ -2,7 +2,6 @@ package com.ggj.pulse.entities;
 
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -190,6 +189,11 @@ public class PlayerEntity extends ActionEntity {
         font.drawMultiLine(batch, builder.toString(), 40, 120);
         sprite.draw(batch);
 
+    }
+
+    @Override
+    float getBodySize() {
+        return 0;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     public void setPulseSpeed(int pulseSpeed) {
