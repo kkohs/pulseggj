@@ -25,7 +25,7 @@ public class RectangleEntity extends ActionEntity {
     public void render(SpriteBatch batch, Camera camera, AssetManager assetManager, float scaleX, float scaleY) {
         coords.set(getPos().x - w / 2, getPos().y - h / 2, 0);
         camera.project(coords);
-        sprite.setTexture(assetManager.get(AssetManager.ENEMY_ONE, Texture.class));
+        sprite.setTexture(assetManager.get(AssetManager.ENEMY_TWO, Texture.class));
         sprite.setSize(w * scaleX, h * scaleY);
 
         sprite.setU(0);
@@ -60,7 +60,7 @@ public class RectangleEntity extends ActionEntity {
 
     @Override
     public void update() {
-        if(getPos().y < -90f) {
+        if (getPos().y < -90f) {
             applicationContainer.destroyEntity(this);
         }
     }

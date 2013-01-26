@@ -28,6 +28,7 @@ public class ObjEmitter extends ActionEntity {
     public void update() {
         long t = applicationContainer.getCurrTime();
         if (t >= nextSpawn) {
+            if(maxCdTime>1000) maxCdTime -= 500;
             AbstractEntity entity;
             if (random.nextBoolean()) {
                 entity = entityFactory.createBox(getPos().x, getPos().y,
