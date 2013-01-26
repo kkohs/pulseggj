@@ -28,6 +28,7 @@ public class AssetManager extends com.badlogic.gdx.assets.AssetManager {
     public static final String ENEMY_FOUR = "textures/enemy4.png";
     public static final String BACK_GROUND = "textures/pulseLevelBackground.png";
     public static final String HEARTBEAT = "heartbeat-01.mp3";
+    public static final String CORRUPTION = "futuresoundfx-14.mp3";
 
     private BodyEditorLoader bodyEditorLoader;
 
@@ -44,6 +45,7 @@ public class AssetManager extends com.badlogic.gdx.assets.AssetManager {
         this.load("textures/pulseHeart.png", Texture.class);
         this.load(CHAIN_TEXTURE, Texture.class);
         this.load(HEARTBEAT, Sound.class);
+        this.load(CORRUPTION, Sound.class);
         this.finishLoading();
     }
 

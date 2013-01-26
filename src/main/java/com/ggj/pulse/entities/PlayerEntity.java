@@ -28,7 +28,7 @@ public class PlayerEntity extends ActionEntity {
     private boolean render = true;
     private Sprite sprite;
     private boolean shouldMove;
-    private int pulse = 30;
+    private int pulse = 25;
     private int pulseTime = 0;
     private int pulseSpeed = 3;
     private boolean hasPulse = true;
@@ -109,7 +109,7 @@ public class PlayerEntity extends ActionEntity {
     @Override
     public void update() {
         pulseTime++;
-        setPulseSpeed(anchors.size());
+        setPulseSpeed(Math.min(anchors.size(), (int) health / 25));
         if (getPos().y < -90f) {
             applicationContainer.destroyEntity(this);
         }
@@ -198,5 +198,9 @@ public class PlayerEntity extends ActionEntity {
 
     public void setHasPulse(boolean hasPulse) {
         this.hasPulse = hasPulse;
+    }
+
+    public boolean isHasPulse() {
+        return hasPulse;
     }
 }

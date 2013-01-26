@@ -1,5 +1,6 @@
 package com.ggj.pulse.physics;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
@@ -8,15 +9,18 @@ import com.ggj.pulse.ApplicationContainer;
 import com.ggj.pulse.entities.AbstractEntity;
 import com.ggj.pulse.entities.BloodVesselEntity;
 import com.ggj.pulse.entities.PlayerEntity;
+import com.ggj.pulse.utils.AssetManager;
 
 /**
  * @author Modris Vekmanis
  */
 public class GameContactListener implements ContactListener {
     private ApplicationContainer applicationContainer;
+    private Sound collision;
 
     public GameContactListener(ApplicationContainer applicationContainer) {
         this.applicationContainer = applicationContainer;
+        collision = applicationContainer.getAssetManager().get(AssetManager.CORRUPTION, Sound.class);
     }
 
     @Override
@@ -27,11 +31,12 @@ public class GameContactListener implements ContactListener {
             if (a instanceof PlayerEntity && !(b instanceof BloodVesselEntity) && !(b instanceof PlayerEntity)) {
                 ((PlayerEntity) a).setHealth(((PlayerEntity) a).getHealth() - .1f * b.getBody().getLinearVelocity().len());
                 applicationContainer.destroyEntity(b);
+                if (((PlayerEntity) a).isHasPulse()) collision.play();
             }
             if (b instanceof PlayerEntity && !(a instanceof BloodVesselEntity) && !(a instanceof PlayerEntity)) {
                 ((PlayerEntity) b).setHealth(((PlayerEntity) b).getHealth() - .1f * a.getBody().getLinearVelocity().len());
                 applicationContainer.destroyEntity(a);
-
+                if (((PlayerEntity) b).isHasPulse()) collision.play();
             }
         }
 

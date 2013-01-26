@@ -91,6 +91,6 @@ public class PulseGame extends Game {
     }
 
     public static void main(String[] args) {
-        new LwjglApplication(new PulseGame(), "Spēle", 1600, 900, true);
+        new LwjglApplication(new PulseGame(), "Pulse", 1600, 900, true);
     }
 }
