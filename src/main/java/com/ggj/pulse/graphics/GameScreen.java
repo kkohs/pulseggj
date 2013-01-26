@@ -7,6 +7,10 @@ import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.ggj.pulse.ApplicationContainer;
+import com.ggj.pulse.entities.AbstractEntity;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author Modris Vekmanis
@@ -17,6 +21,7 @@ public class GameScreen extends AbstractScreen {
     private World world;
     private Camera camera;
     private Box2DDebugRenderer box2DDebugRenderer;
+    private List<AbstractEntity> visibleEntities = new LinkedList<>();
 
     public GameScreen() {
         camera = new PerspectiveCamera(60, 1600, 900);
@@ -37,6 +42,10 @@ public class GameScreen extends AbstractScreen {
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
         camera.update();
         box2DDebugRenderer.render(world, camera.combined);
+
+        for (AbstractEntity entity : visibleEntities) {
+               entity.render();
+        }
     }
 
     public ApplicationContainer getApplicationContainer() {
@@ -45,5 +54,9 @@ public class GameScreen extends AbstractScreen {
 
     public void setApplicationContainer(ApplicationContainer applicationContainer) {
         this.applicationContainer = applicationContainer;
+    }
+
+    public List<AbstractEntity> getVisibleEntities() {
+        return visibleEntities;
     }
 }

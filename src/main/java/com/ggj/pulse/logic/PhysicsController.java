@@ -6,6 +6,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.ggj.pulse.ApplicationContainer;
 import com.ggj.pulse.entities.AbstractEntity;
 import com.ggj.pulse.entities.ActionEntity;
+import com.ggj.pulse.entities.BloodVesselEntity;
 import com.ggj.pulse.utils.EntityFactory;
 
 import java.util.LinkedList;
