@@ -3,7 +3,6 @@ package com.ggj.pulse.logic;
 import com.ggj.pulse.ApplicationContainer;
 import com.ggj.pulse.entities.AbstractEntity;
 import com.ggj.pulse.entities.ActionEntity;
-import com.ggj.pulse.entities.BloodVesselEntity;
 import com.ggj.pulse.graphics.GameScreen;
 
 /**
@@ -17,9 +16,6 @@ public class LogicController {
     public void update() {
 
         for (AbstractEntity entity : applicationContainer.getEntitiesToDestroy()) {
-            if (entity instanceof BloodVesselEntity) {
-                physicsController.getWorld().destroyJoint(((BloodVesselEntity) entity).getJoint());
-            }
             if (entity instanceof ActionEntity) {
                 physicsController.getActionEntities().remove(entity);
             }
