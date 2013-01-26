@@ -36,11 +36,11 @@ public class EntityFactory {
 
 
         Body body = world.createBody(bodyDef);
-      //  assetManager.attachShape(body, fixtureDef, 100, "left");
-          body.createFixture(fixtureDef);
+        //  assetManager.attachShape(body, fixtureDef, 100, "left");
+        body.createFixture(fixtureDef);
         body.setAngularDamping(0.5f);
         body.setLinearDamping(0.05f);
-        if(shape != null) {
+        if (shape != null) {
             shape.dispose();
         }
         return body;
@@ -60,36 +60,37 @@ public class EntityFactory {
         Body body = world.createBody(bodyDef);
         assetManager.attachShape(body, fixtureDef, 300, bodyName);
         body.setAngularDamping(0.5f);
-        body.setLinearDamping(0.05f);
+        //body.setLinearDamping(0.0005f);
         body.setUserData(entity);
         return entity;
     }
 
-    public void createBox(float x, float y, float halfWidth, float halfHeight, float angle) {
+    public AbstractEntity createBox(float x, float y, float halfWidth, float halfHeight, float angle) {
         Shape shape = new PolygonShape();
         ((PolygonShape) shape).setAsBox(halfWidth, halfHeight);
         AbstractEntity entity = new AbstractEntity();
         entity.setPos(new Vector2(x, y));
-        Body body = createObject(entity, shape);
+        entity.setBody(createObject(entity, shape));
 
+        return entity;
     }
 
     public PlayerEntity createPlayer(float x, float y, float halfWidth, float halfHeight, float angle) {
         PlayerEntity entity = new PlayerEntity();
-        entity.setPos(new Vector2(x,y));
+        entity.setPos(new Vector2(x, y));
         entity.setStatic(false);
         CircleShape shape = new CircleShape();
         shape.setRadius(4);
 
-        Body body = createObject(entity,shape);
+        Body body = createObject(entity, shape);
         entity.setBody(body);
         return entity;
     }
 
     public void attachRopes(PlayerEntity entity) {
-       BodyDef anchorDef = new BodyDef();
-        anchorDef.position.set(-70,48);
-    //    anchorDef.type = BodyDef.BodyType.StaticBody;
+        BodyDef anchorDef = new BodyDef();
+        anchorDef.position.set(-70, 48);
+        //    anchorDef.type = BodyDef.BodyType.StaticBody;
 
         Body anchor = world.createBody(anchorDef);
 
@@ -98,14 +99,14 @@ public class EntityFactory {
         ropeJointDef.bodyB = entity.getBody();
         ropeJointDef.bodyA = anchor;
         ropeJointDef.maxLength = 100f;
-        RopeJoint ropeJoint = (RopeJoint)  world.createJoint(ropeJointDef);
+        RopeJoint ropeJoint = (RopeJoint) world.createJoint(ropeJointDef);
 
         anchorDef = new BodyDef();
-        anchorDef.position.set( -70, 58);
-   //     anchorDef.type = BodyDef.BodyType.StaticBody;
+        anchorDef.position.set(-70, 58);
+        //     anchorDef.type = BodyDef.BodyType.StaticBody;
 
-         anchor = world.createBody(anchorDef);
-         entity.addAnchor(ropeJoint);
+        anchor = world.createBody(anchorDef);
+        entity.addAnchor(ropeJoint);
 
         ropeJointDef = new RopeJointDef();
         ropeJointDef.bodyB = entity.getBody();
@@ -117,9 +118,9 @@ public class EntityFactory {
 
         anchorDef = new BodyDef();
         anchorDef.position.set(154, 71);
-    //    anchorDef.type = BodyDef.BodyType.StaticBody;
+        //    anchorDef.type = BodyDef.BodyType.StaticBody;
 
-         anchor = world.createBody(anchorDef);
+        anchor = world.createBody(anchorDef);
 
 
         ropeJointDef = new RopeJointDef();
@@ -131,10 +132,10 @@ public class EntityFactory {
         entity.addAnchor(ropeJoint);
 
         anchorDef = new BodyDef();
-        anchorDef.position.set(126,-19);
-   //     anchorDef.type = BodyDef.BodyType.StaticBody;
+        anchorDef.position.set(126, -19);
+        //     anchorDef.type = BodyDef.BodyType.StaticBody;
 
-         anchor = world.createBody(anchorDef);
+        anchor = world.createBody(anchorDef);
 
 
         ropeJointDef = new RopeJointDef();
@@ -142,15 +143,15 @@ public class EntityFactory {
         ropeJointDef.bodyA = anchor;
         ropeJointDef.maxLength = 100f;
 
-        ropeJoint = (RopeJoint)  world.createJoint(ropeJointDef);
+        ropeJoint = (RopeJoint) world.createJoint(ropeJointDef);
         entity.addAnchor(ropeJoint);
 
 
         anchorDef = new BodyDef();
-        anchorDef.position.set(54,112);
-   //     anchorDef.type = BodyDef.BodyType.StaticBody;
+        anchorDef.position.set(54, 112);
+        //     anchorDef.type = BodyDef.BodyType.StaticBody;
 
-         anchor = world.createBody(anchorDef);
+        anchor = world.createBody(anchorDef);
 
 
         ropeJointDef = new RopeJointDef();
@@ -158,15 +159,15 @@ public class EntityFactory {
         ropeJointDef.bodyA = anchor;
         ropeJointDef.maxLength = 100f;
 
-        ropeJoint = (RopeJoint)  world.createJoint(ropeJointDef);
+        ropeJoint = (RopeJoint) world.createJoint(ropeJointDef);
         entity.addAnchor(ropeJoint);
 
 
         anchorDef = new BodyDef();
-        anchorDef.position.set(68,97);
-   //     anchorDef.type = BodyDef.BodyType.StaticBody;
+        anchorDef.position.set(68, 97);
+        //     anchorDef.type = BodyDef.BodyType.StaticBody;
 
-         anchor = world.createBody(anchorDef);
+        anchor = world.createBody(anchorDef);
 
 
         ropeJointDef = new RopeJointDef();
@@ -174,7 +175,7 @@ public class EntityFactory {
         ropeJointDef.bodyA = anchor;
         ropeJointDef.maxLength = 100f;
 
-        ropeJoint = (RopeJoint)  world.createJoint(ropeJointDef);
+        ropeJoint = (RopeJoint) world.createJoint(ropeJointDef);
         entity.addAnchor(ropeJoint);
 
     }
