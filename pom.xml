@@ -7,111 +7,71 @@
     <groupId>pulseggj</groupId>
     <artifactId>pulseggj</artifactId>
     <version>1.0-SNAPSHOT</version>
+
     <packaging>jar</packaging>
-    <profiles>
-        <profile>
-            <id>win</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-assembly-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>make-assembly</id>
-                                <phase>install</phase>
-                                <goals>
-                                    <goal>attached</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <appendAssemblyId>false</appendAssemblyId>
-                            <descriptorRefs>
-                                <descriptorRef>jar-with-dependencies</descriptorRef>
-                            </descriptorRefs>
-                            <archive>
-                                <manifest>
-                                    <mainClass>com.ggj.pulse.PulseGame</mainClass>
-                                </manifest>
-                            </archive>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-compiler-plugin</artifactId>
-                        <version>2.5.1</version>
-                        <configuration>
-                            <target>1.7</target>
-                            <source>1.7</source>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>android</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.jayway.maven.plugins.android.generation2</groupId>
-                        <artifactId>android-maven-plugin</artifactId>
-                        <version>3.5.0</version>
-                        <configuration>
-                            <sdk>
-                                <path>D:\Develoment\tools\sdk</path>
-                                <!-- platform or api level (api level 4 = platform 1.6)-->
-                                <platform>17</platform>
-                            </sdk>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-            <dependencies>
-                <dependency>
-                    <groupId>com.google.android</groupId>
-                    <artifactId>android</artifactId>
-                    <version>4.1.1.4</version>
-                    <scope>provided</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-    </profiles>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>attached</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.ggj.pulse.PulseGame</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.5.1</version>
+                <configuration>
+                    <target>1.7</target>
+                    <source>1.7</source>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
-
-    <repositories>
-        <repository>
-            <id>libgdx</id>
-            <url>http://libgdx.badlogicgames.com/nightlies/maven/</url>
-        </repository>
-    </repositories>
     <properties>
-        <lib.gdx.version>0.9.8-SNAPSHOT</lib.gdx.version>
+        <lib.gdx.version>0.9.8</lib.gdx.version>
     </properties>
     <dependencies>
-
         <dependency>
-            <groupId>com.badlogic.gdx</groupId>
+            <groupId>com.badlogic</groupId>
             <artifactId>gdx-backend-lwjgl</artifactId>
             <version>${lib.gdx.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.badlogic.gdx</groupId>
-            <artifactId>gdx-backend-android</artifactId>
+            <groupId>com.badlogic</groupId>
+            <artifactId>gdx-backend-lwjgl</artifactId>
             <version>${lib.gdx.version}</version>
+            <classifier>natives</classifier>
         </dependency>
-
         <dependency>
-            <groupId>com.badlogic.gdx</groupId>
+            <groupId>com.badlogic</groupId>
             <artifactId>gdx</artifactId>
             <version>${lib.gdx.version}</version>
         </dependency>
-
         <dependency>
-            <groupId>com.badlogic.gdx</groupId>
-            <artifactId>gdx-platform</artifactId>
+            <groupId>com.badlogic</groupId>
+            <artifactId>gdx</artifactId>
             <version>${lib.gdx.version}</version>
-            <type>pom</type>
+            <classifier>natives</classifier>
         </dependency>
     </dependencies>
 </project>

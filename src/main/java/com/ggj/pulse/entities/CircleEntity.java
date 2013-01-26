@@ -59,11 +59,6 @@ public class CircleEntity extends ActionEntity {
         sprite.draw(batch);
     }
 
-    @Override
-    float getBodySize() {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
     public float getH() {
         return h;
     }
