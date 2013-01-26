@@ -32,12 +32,38 @@ public class MapLoader {
     }
 
 
-
-
     private void createObjEmitters() {
         ObjEmitter emitter = new ObjEmitter();
-        emitter.setPos(new Vector2(0, 0));
-        emitter.setDirection(new Vector2(1, 2));
+        emitter.setPos(new Vector2(-46.217644f, 33.4002f));
+        emitter.setDirection(new Vector2(4, 2));
+        emitter.setEntityFactory(entityFactory);
+        emitter.setApplicationContainer(applicationContainer);
+        physicsController.getActionEntities().add(emitter);
+
+        emitter = new ObjEmitter();
+        emitter.setPos(new Vector2(-34.42144f, 85.41081f));
+        emitter.setDirection(new Vector2(15, 5));
+        emitter.setEntityFactory(entityFactory);
+        emitter.setApplicationContainer(applicationContainer);
+        physicsController.getActionEntities().add(emitter);
+
+        emitter = new ObjEmitter();
+        emitter.setPos(new Vector2(26.294594f, 100.70863f));
+        emitter.setDirection(new Vector2(1f, -5));
+        emitter.setEntityFactory(entityFactory);
+        emitter.setApplicationContainer(applicationContainer);
+        physicsController.getActionEntities().add(emitter);
+
+        emitter = new ObjEmitter();
+        emitter.setPos(new Vector2(114.294594f, 73.70863f));
+        emitter.setDirection(new Vector2(-4f, -5));
+        emitter.setEntityFactory(entityFactory);
+        emitter.setApplicationContainer(applicationContainer);
+        physicsController.getActionEntities().add(emitter);
+
+        emitter = new ObjEmitter();
+        emitter.setPos(new Vector2(129.294594f, 44.70863f));
+        emitter.setDirection(new Vector2(-10f, 2));
         emitter.setEntityFactory(entityFactory);
         emitter.setApplicationContainer(applicationContainer);
         physicsController.getActionEntities().add(emitter);

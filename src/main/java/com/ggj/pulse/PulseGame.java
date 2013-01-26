@@ -1,6 +1,7 @@
 package com.ggj.pulse;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.ggj.pulse.graphics.GameScreen;
@@ -29,10 +30,11 @@ public class PulseGame extends Game {
 
     private FPSLogger logger;
     private AssetManager assetManager;
+    private long logTime = 0;
 
     @Override
     public void create() {
-       logger = new FPSLogger();
+        logger = new FPSLogger();
         applicationContainer = new ApplicationContainer();
         logicController = new LogicController();
         physicsController = new PhysicsController();
@@ -66,6 +68,10 @@ public class PulseGame extends Game {
     @Override
     public void render() {
         logger.log();
+        if (applicationContainer.getCurrTime() >= logTime) {    //todo remove
+            Gdx.app.log("Body count: ", String.valueOf(physicsController.getWorld().getBodyCount()));
+            logTime = applicationContainer.getCurrTime() + 1000;
+        }
         logicController.update();
         super.render();
     }

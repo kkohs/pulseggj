@@ -15,6 +15,7 @@ public class LogicController {
     private PhysicsController physicsController;
 
     public void update() {
+        applicationContainer.setCurrTime(System.currentTimeMillis());
         physicsController.update();
     }
 

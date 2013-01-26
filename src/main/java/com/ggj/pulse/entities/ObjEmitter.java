@@ -17,8 +17,11 @@ public class ObjEmitter extends ActionEntity {
 
     @Override
     public void update() {
-        //if(ne)
-        entityFactory.createBox(getPos().x, getPos().y, 5, 5, 5);
+        long t = applicationContainer.getCurrTime();
+        if (t >= nextSpawn) {
+            entityFactory.createBox(getPos().x, getPos().y, 1, 1, 5);
+            nextSpawn = t + cdTime;
+        }
     }
 
     public ApplicationContainer getApplicationContainer() {
