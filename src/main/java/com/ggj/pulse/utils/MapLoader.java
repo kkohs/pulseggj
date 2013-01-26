@@ -6,6 +6,7 @@ import com.ggj.pulse.entities.AbstractEntity;
 import com.ggj.pulse.entities.BloodVesselEntity;
 import com.ggj.pulse.entities.ObjEmitter;
 import com.ggj.pulse.entities.PlayerEntity;
+import com.ggj.pulse.graphics.GameScreen;
 import com.ggj.pulse.logic.PhysicsController;
 
 /**
@@ -15,12 +16,14 @@ public class MapLoader {
     private ApplicationContainer applicationContainer;
     private PhysicsController physicsController;
     private EntityFactory entityFactory;
+    private GameScreen screen;
 
     public void loadLevel() {
-        AbstractEntity world = entityFactory.createStaticObject(30, 40, 10, 10, 3, "map");
-        AbstractEntity pipes = entityFactory.createStaticObject(30, 40, 10, 10, 3, "pipes");
+        AbstractEntity world = entityFactory.createStaticObject(60, 40, 10, 10, 3, "map");
+        AbstractEntity pipes = entityFactory.createStaticObject(30, 40, 10, 10, 3, "pipe");
         applicationContainer.put("gameWorld", world);
-        applicationContainer.put("pipes", pipes);
+        applicationContainer.put("pipe", pipes);
+        screen.getVisibleEntities().add(world);
        createObjEmitters();
         createPlayer();
     }
@@ -96,5 +99,9 @@ public class MapLoader {
 
     public void setApplicationContainer(ApplicationContainer applicationContainer) {
         this.applicationContainer = applicationContainer;
+    }
+
+    public void setScreen(GameScreen screen) {
+        this.screen = screen;
     }
 }

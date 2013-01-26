@@ -1,5 +1,7 @@
 package com.ggj.pulse.utils;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
@@ -7,10 +9,7 @@ import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
 import com.badlogic.gdx.physics.box2d.joints.RopeJoint;
 import com.badlogic.gdx.physics.box2d.joints.RopeJointDef;
 import com.ggj.pulse.ApplicationContainer;
-import com.ggj.pulse.entities.AbstractEntity;
-import com.ggj.pulse.entities.BloodVesselEntity;
-import com.ggj.pulse.entities.PlayerEntity;
-import com.ggj.pulse.entities.RectangleEntity;
+import com.ggj.pulse.entities.*;
 import com.ggj.pulse.graphics.GameScreen;
 
 /**
@@ -28,9 +27,9 @@ public class EntityFactory {
     }
 
     public Body createObject(AbstractEntity entity, Shape shape, float angle) {
-        return createObject(entity, shape, angle, false);
+        return createObject(entity, shape, angle, false, 20);
     }
-    public Body createObject(AbstractEntity entity, Shape shape, float angle, boolean fixedRotation) {
+    public Body createObject(AbstractEntity entity, Shape shape, float angle, boolean fixedRotation, int density) {
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.x = entity.getPos().x;
         bodyDef.angle = angle;
@@ -44,7 +43,7 @@ public class EntityFactory {
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
-        fixtureDef.density = 2;
+        fixtureDef.density = density;
 
 
         Body body = world.createBody(bodyDef);
@@ -59,7 +58,7 @@ public class EntityFactory {
     }
 
     public AbstractEntity createStaticObject(float x, float y, float halfWidth, float halfHeight, float angle, String bodyName) {
-        AbstractEntity entity = new AbstractEntity();
+        BackgroundEntity entity = new BackgroundEntity();
         entity.setPos(new Vector2(x, y));
 
         BodyDef bodyDef = new BodyDef();
@@ -68,12 +67,14 @@ public class EntityFactory {
         bodyDef.type = BodyDef.BodyType.StaticBody;
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.density = 2;
-
+            entity.setTexture(new Sprite(assetManager.get("textures/levelProgressReport.jpg", Texture.class),1600,900));
         Body body = world.createBody(bodyDef);
-        assetManager.attachShape(body, fixtureDef, 300, bodyName);
+        assetManager.attachShape(body, fixtureDef, 400, bodyName);
         body.setAngularDamping(0.5f);
         //body.setLinearDamping(0.0005f);
         body.setUserData(entity);
+        entity.setOrigin(assetManager.getOrigin(bodyName));
+        entity.setBody(body);
         return entity;
     }
 
@@ -108,7 +109,7 @@ public class EntityFactory {
         CircleShape shape = new CircleShape();
         shape.setRadius(4);
 
-        Body body = createObject(entity, shape, 0, true);
+        Body body = createObject(entity, shape, 0, true,200);
         entity.setBody(body);
 
         BodyDef centerDef = new BodyDef();
@@ -162,7 +163,7 @@ public class EntityFactory {
             e.setPos(vec.tmp().mul(i * width).add(wallPos));
             PolygonShape shape = new PolygonShape();
             shape.setAsBox(width, height);
-            e.setBody(createObject(e, shape, vec.angle() * MathUtils.degreesToRadians, true));
+            e.setBody(createObject(e, shape, vec.angle() * MathUtils.degreesToRadians, true,1));
             e.getBody().setUserData(e);
             e.setGrpIndex(index);
 

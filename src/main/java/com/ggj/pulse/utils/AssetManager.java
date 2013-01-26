@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
@@ -28,6 +29,7 @@ public class AssetManager extends com.badlogic.gdx.assets.AssetManager {
 
         //load("TEDTURENAMVE", Texture.class);
         this.load("textures/New Bitmap Image.bmp", Texture.class);
+        this.load("textures/levelProgressReport.jpg", Texture.class);
         this.finishLoading();
     }
 
@@ -39,6 +41,9 @@ public class AssetManager extends com.badlogic.gdx.assets.AssetManager {
             spriteHashMap.put(name, atlas.createSprite(name));
             return spriteHashMap.get(name);
         }
+    }
+    public Vector2 getOrigin(String name) {
+       return bodyEditorLoader.getOrigin(name, 200);
     }
 
     public void attachShape(Body body, FixtureDef fixtureDef, int scale, String name) {

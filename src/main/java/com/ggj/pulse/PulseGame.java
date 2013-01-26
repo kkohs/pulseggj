@@ -68,6 +68,7 @@ public class PulseGame extends Game {
         mapLoader.setEntityFactory(entityFactory);
         mapLoader.setPhysicsController(physicsController);
         mapLoader.setApplicationContainer(applicationContainer);
+       mapLoader.setScreen(gameScreen);
         mapLoader.loadLevel();
 
         this.setScreen(gameScreen);
