@@ -30,7 +30,7 @@ public class MapLoader {
         entityFactory.attachRopes(entity);
         applicationContainer.put("player", entity);
         physicsController.getActionEntities().add(entity);
-        
+       // entityFactory.createRope(entity);
         for(BloodVesselEntity vesselEntity : entity.getAnchors()) {
             physicsController.getActionEntities().add(vesselEntity);
         }

@@ -48,7 +48,7 @@ public class InputController extends InputAdapter {
         def.bodyB = playerEntity.getBody();
         def.collideConnected = true;
         def.target.set(playerEntity.getPos());
-        def.maxForce = 1000.0f * playerEntity.getBody().getMass();
+        def.maxForce = 100000.0f * playerEntity.getBody().getMass();
 
         mouseJoint = (MouseJoint)world.createJoint(def);
         mouseJoint.setTarget(new Vector2().set(this.pointer.x,this.pointer.y));
