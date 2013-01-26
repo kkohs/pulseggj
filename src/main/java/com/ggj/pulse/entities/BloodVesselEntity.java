@@ -160,7 +160,7 @@ public class BloodVesselEntity extends ActionEntity {
                 sprite.setV2(1);
                 sprite.setRotation((float) Math.toDegrees(e.getBody().getAngle()));
                 sprite.setPosition(coords.x, coords.y);
-                sprite.setOrigin(width * scaleX * 2, width * scaleY * 2);
+                sprite.setOrigin(width * scaleX / 2, height * scaleY / 2);
                 sprite.setSize(width * scaleX * 2, height * scaleY * 2);
                 sprite.draw(batch);
             }
