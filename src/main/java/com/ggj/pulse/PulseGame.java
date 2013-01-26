@@ -3,6 +3,7 @@ package com.ggj.pulse;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.ggj.pulse.graphics.GameScreen;
 import com.ggj.pulse.logic.InputController;
@@ -93,6 +94,12 @@ public class PulseGame extends Game {
     }
 
     public static void main(String[] args) {
-        new LwjglApplication(new PulseGame(), "Pulse", 1600, 900, true);
+        LwjglApplicationConfiguration configuration = new LwjglApplicationConfiguration();
+        configuration.resizable = false;
+        configuration.width = 1600;
+        configuration.height = 900;
+        configuration.useGL20 = true;
+        configuration.fullscreen = true;
+        new LwjglApplication(new PulseGame(), configuration);
     }
 }
