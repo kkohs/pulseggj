@@ -6,7 +6,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.ggj.pulse.ApplicationContainer;
 import com.ggj.pulse.entities.AbstractEntity;
 import com.ggj.pulse.entities.ActionEntity;
-import com.ggj.pulse.entities.BloodVesselEntity;
 import com.ggj.pulse.utils.EntityFactory;
 
 import java.util.LinkedList;
@@ -34,9 +33,7 @@ public class PhysicsController {
 
     public void update() {
         for(AbstractEntity entity : applicationContainer.getEntitiesToDestroy()) {
-            if(entity instanceof BloodVesselEntity) {
-                world.destroyJoint(((BloodVesselEntity) entity).getJoint());
-            }
+
             if(entity instanceof ActionEntity) {
                 actionEntities.remove(entity);
             }

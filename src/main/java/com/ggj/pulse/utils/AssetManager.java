@@ -24,9 +24,10 @@ public class AssetManager extends com.badlogic.gdx.assets.AssetManager {
     public void initialize() {
         spriteHashMap = new HashMap<String, Sprite>();
         bodyEditorLoader = new BodyEditorLoader(Gdx.files.internal("map"));
-
         //load("TEDTURENAMVE", Texture.class);
+
     }
+
 
     public Sprite getSprite(String name) {
         if (spriteHashMap.containsKey(name)) {

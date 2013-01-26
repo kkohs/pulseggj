@@ -1,8 +1,12 @@
 package com.ggj.pulse.entities;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.joints.RopeJoint;
 import com.ggj.pulse.ApplicationContainer;
+
+import java.util.LinkedList;
 
 /**
  * Date: 13.26.1
@@ -17,6 +21,10 @@ public class BloodVesselEntity extends ActionEntity {
     private float health;
     private float distance;
 
+    private LinkedList<Body> chain = new LinkedList<>();
+
+
+    private int grpIndex;
     private Vector2 anchorPoint;
 
     private RopeJoint joint;
@@ -66,6 +74,22 @@ public class BloodVesselEntity extends ActionEntity {
         this.parent = parent;
     }
 
+    public int getGrpIndex() {
+        return grpIndex;
+    }
+
+    public void setGrpIndex(int grpIndex) {
+        this.grpIndex = grpIndex;
+    }
+
+    public LinkedList<Body> getChain() {
+        return chain;
+    }
+
+    public void setChain(LinkedList<Body> chain) {
+        this.chain = chain;
+    }
+
     @Override
     public void update() {
         float currentDistance = anchorPoint.dst(parent.getPos());
@@ -73,9 +97,12 @@ public class BloodVesselEntity extends ActionEntity {
             health -= 0.001 * currentDistance;
 
         }
-        if(health <0 ) {
+        if(health <0 && chain.isEmpty()) {
             applicationContainer.destroyEntity(this);
             parent.getAnchors().remove(this);
+        } else if(health < 0) {
+           World world = (World) applicationContainer.get("physicsWorld");
+            world.destroyBody(chain.removeFirst());
         }
 
 
