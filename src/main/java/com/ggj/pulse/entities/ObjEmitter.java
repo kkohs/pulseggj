@@ -13,8 +13,8 @@ import java.security.SecureRandom;
  */
 public class ObjEmitter extends ActionEntity {
     private static SecureRandom random = new SecureRandom();
-    private static float maxSize = 4;
-    private static float minSize = 1.5f;
+    private static float maxSize = 10f;
+    private static float minSize = 4f;
     private static float speedModifier = 1000000;
 
     private ApplicationContainer applicationContainer;
@@ -45,7 +45,7 @@ public class ObjEmitter extends ActionEntity {
                 entity = entityFactory.createCircle(getPos().x, getPos().y, size, random.nextFloat() * 10);
                 ((CircleEntity) entity).setText(random.nextInt(3));
             }
-            size *= .05;
+            size *= .005;
 
             Vector2 vel = new Vector2(vT);
             vel.mul((random.nextFloat() * maxOffset) - maxOffset / 2);
