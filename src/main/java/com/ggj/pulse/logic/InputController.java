@@ -14,9 +14,9 @@ import com.ggj.pulse.ApplicationContainer;
 import com.ggj.pulse.entities.PlayerEntity;
 
 /**
- *
  * Date: 13.26.1
  * Time: 01:08
+ *
  * @author Kristaps Kohs
  */
 public class InputController extends InputAdapter {
@@ -32,15 +32,21 @@ public class InputController extends InputAdapter {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if(button != Input.Buttons.LEFT) return false;
+        if (button != Input.Buttons.LEFT) return false;
         Camera camera = (Camera) applicationContainer.get("gameCam");
         World world = (World) applicationContainer.get("physicsWorld");
-       this.pointer.set(screenX, screenY, 0);
+        this.pointer.set(screenX, screenY, 0);
         camera.unproject(this.pointer);
-        Gdx.app.log("Mouse Pointer" , this.pointer.toString());
+        Gdx.app.log("Mouse Pointer", this.pointer.toString());
         PlayerEntity playerEntity = (PlayerEntity) applicationContainer.get("player");
-         if (playerEntity.isDead())  return true;
-        this.pointer.set(screenX, screenY,0);
+        if (playerEntity.isDead()) {
+            if (mouseJoint != null) {
+                world.destroyJoint(mouseJoint);
+                mouseJoint = null;
+            }
+            return true;
+        }
+        this.pointer.set(screenX, screenY, 0);
         camera.unproject(this.pointer);
 
         MouseJointDef def = new MouseJointDef();
@@ -50,8 +56,8 @@ public class InputController extends InputAdapter {
         def.target.set(playerEntity.getPos());
         def.maxForce = 100000.0f * playerEntity.getBody().getMass();
 
-        mouseJoint = (MouseJoint)world.createJoint(def);
-        mouseJoint.setTarget(new Vector2().set(this.pointer.x,this.pointer.y));
+        mouseJoint = (MouseJoint) world.createJoint(def);
+        mouseJoint.setTarget(new Vector2().set(this.pointer.x, this.pointer.y));
         playerEntity.getBody().setAwake(true);
         playerEntity.setShouldMove(true);
         return true;
@@ -61,20 +67,26 @@ public class InputController extends InputAdapter {
     public boolean touchDragged(int screenX, int screenY, int pointer) {
         PlayerEntity playerEntity = (PlayerEntity) applicationContainer.get("player");
         if (playerEntity.isDead()) {
-        touchUp(0,0, 0, Input.Buttons.LEFT);
+            if (mouseJoint != null) {
+                World world = (World) applicationContainer.get("physicsWorld");
+
+                world.destroyJoint(mouseJoint);
+                mouseJoint = null;
+            }
+            touchUp(0, 0, 0, Input.Buttons.LEFT);
             return true;
         }
         Camera camera = (Camera) applicationContainer.get("gameCam");
         if (mouseJoint != null) {
             camera.unproject(this.pointer.set(screenX, screenY, 0));
-            mouseJoint.setTarget(new Vector2().set(this.pointer.x,this.pointer.y));
+            mouseJoint.setTarget(new Vector2().set(this.pointer.x, this.pointer.y));
         }
         return false;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        if(button != Input.Buttons.LEFT) return false;
+        if (button != Input.Buttons.LEFT) return false;
 
         World world = (World) applicationContainer.get("physicsWorld");
         PlayerEntity playerEntity = (PlayerEntity) applicationContainer.get("player");
@@ -85,5 +97,14 @@ public class InputController extends InputAdapter {
             playerEntity.setShouldMove(false);
         }
         return super.touchUp(screenX, screenY, pointer, button);    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
+        PlayerEntity playerEntity = (PlayerEntity) applicationContainer.get("player");
+        if (playerEntity != null && playerEntity.isDead() && keycode == Input.Keys.SPACE) {
+            applicationContainer.setNewGame(true);
+        }
+        return true;
     }
 }

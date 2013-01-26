@@ -4,15 +4,20 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.ggj.pulse.ApplicationContainer;
 import com.ggj.pulse.entities.AbstractEntity;
+import com.ggj.pulse.entities.PlayerEntity;
 import com.ggj.pulse.utils.AssetManager;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * @author Modris Vekmanis
@@ -40,6 +45,7 @@ public class GameScreen extends AbstractScreen {
     };
 
     public GameScreen() {
+
         camera = new PerspectiveCamera(60, 1600, 900);
         box2DDebugRenderer = new Box2DDebugRenderer();
         camera.translate(50, 50, 200);
@@ -59,32 +65,50 @@ public class GameScreen extends AbstractScreen {
 
     @Override
     public void render(float delta) {
+        PlayerEntity player = (PlayerEntity) applicationContainer.get("player");
+
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
-        camera.update();
-        box2DDebugRenderer.render(world, camera.combined);
+        if (player != null) {
 
-        coords.set(1, 1, 0);
-        camera.project(coords);
-        float x1 = coords.x;
-        float y1 = coords.y;
+            camera.update();
+            //  box2DDebugRenderer.render(world, camera.combined);
 
-        coords.set(2, 2, 0);
-        camera.project(coords);
-        float x2 = coords.x;
-        float y2 = coords.y;
+            coords.set(1, 1, 0);
+            camera.project(coords);
+            float x1 = coords.x;
+            float y1 = coords.y;
 
-        float scaleX = x2 - x1;
-        float scaleY = y2 - y1;
+            coords.set(2, 2, 0);
+            camera.project(coords);
+            float x2 = coords.x;
+            float y2 = coords.y;
 
-        Collections.sort(visibleEntities, comparator);
+            float scaleX = x2 - x1;
+            float scaleY = y2 - y1;
 
-        batch.begin();
-        for (AbstractEntity entity : visibleEntities) {
-            entity.render(batch, camera, assetManager, scaleX, scaleY);
+            Collections.sort(visibleEntities, comparator);
 
+            batch.begin();
+            if (player.isDead()) {
+                BitmapFont font = new BitmapFont();
+                font.scale(10);
+                Gdx.gl.glClearColor(0, 0, 0, 1);
+
+                font.draw(batch, "DEAD", 600, 500);
+                font = new BitmapFont();
+                font.scale(2);
+                font.draw(batch, "Press space for new game!", 570, 300);
+
+
+            } else {
+                for (AbstractEntity entity : visibleEntities) {
+                    entity.render(batch, camera, assetManager, scaleX, scaleY);
+
+                }
+
+            }
+            batch.end();
         }
-
-        batch.end();
 
     }
 

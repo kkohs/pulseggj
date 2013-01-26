@@ -1,6 +1,7 @@
 package com.ggj.pulse.entities;
 
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -20,33 +21,25 @@ import java.util.List;
  * @author Kristaps Kohs
  */
 public class PlayerEntity extends ActionEntity {
-    private Vector2 target = new Vector2();
     private static Vector3 coords = new Vector3();
-
+    private Vector2 target = new Vector2();
     private boolean render = true;
     private Sprite sprite;
     private boolean shouldMove;
-
     private int pulse = 45;
     private int pulseTime = 0;
     private int pulseSpeed = 3;
     private boolean hasPulse = true;
-
-
     private boolean dead;
-
     private float health = 100;
     private RopeJoint centerJoint;
-
     private ApplicationContainer applicationContainer;
-
+    private List<BloodVesselEntity> anchors = new ArrayList<>();
 
     public PlayerEntity(ApplicationContainer applicationContainer) {
         this.applicationContainer = applicationContainer;
         setRenderOrder(1);
     }
-
-    private List<BloodVesselEntity> anchors = new ArrayList<>();
 
     public Vector2 getTarget() {
         return target;
@@ -101,7 +94,11 @@ public class PlayerEntity extends ActionEntity {
     }
 
     public void setHealth(float health) {
-        this.health = health;
+        if (this.health <= 0) {
+            this.health = 0;
+        } else {
+            this.health = health;
+        }
     }
 
     @Override
@@ -111,7 +108,7 @@ public class PlayerEntity extends ActionEntity {
         if (getPos().y < -90f) {
             applicationContainer.destroyEntity(this);
         }
-        if (health < 0) {
+        if (health <= 0) {
             dead = true;
             hasPulse = false;
             World world = (World) applicationContainer.get("physicsWorld");
@@ -138,8 +135,10 @@ public class PlayerEntity extends ActionEntity {
         }
 
         if (!shouldMove) {
-            if (centerJoint.getMaxLength() > 2)
-                centerJoint.setMaxLength(centerJoint.getMaxLength() - .8f);
+            if (centerJoint.getMaxLength() > 2) {
+                float len = centerJoint.getMaxLength() > 50 ? 50f : centerJoint.getMaxLength();
+                centerJoint.setMaxLength(len - .8f);
+            }
             for (BloodVesselEntity e : anchors) {
                 for (BloodVesselEntity body : e.getChain()) {
                     body.getBody().setLinearVelocity(0, 0);
@@ -172,7 +171,13 @@ public class PlayerEntity extends ActionEntity {
         sprite.setRotation((float) Math.toDegrees(getBody().getAngle()));
         sprite.setPosition(coords.x, coords.y);
 
-
+        BitmapFont font = new BitmapFont();
+        StringBuilder builder = new StringBuilder();
+        builder.append("Heart health " + getHealth() + "\n");
+        for (BloodVesselEntity entity : anchors) {
+            builder.append("Blood vessel health health " + entity.getHealth() + "\n");
+        }
+        font.drawMultiLine(batch, builder.toString(), 40, 120);
         sprite.draw(batch);
 
     }

@@ -155,7 +155,6 @@ public class EntityFactory {
         ropeJointDef.maxLength = 0;
         ropeJointDef.bodyA = center;
         ropeJointDef.bodyB = body;
-
         entity.setCenterJoint((RopeJoint) world.createJoint(ropeJointDef));
         gameScreen.getVisibleEntities().add(entity);
         return entity;
@@ -163,11 +162,11 @@ public class EntityFactory {
 
     public void attachRopes(PlayerEntity entity) {
         Vector2 pos = new Vector2();
-        createRope(entity, new Vector2().set(-84, 49), 1);
-        createRope(entity, new Vector2().set(212, 72), 2);
-        createRope(entity, new Vector2().set(72, 122), 3);
+        createRope(entity, new Vector2().set(-96, 49), 1);
+        createRope(entity, new Vector2().set(204, 79), 2);
+        createRope(entity, new Vector2().set(73, 126), 3);
         // createRope(entity, new Vector2().set(68, 97), 4);
-        createRope(entity, new Vector2().set(166, -13), 5);
+        createRope(entity, new Vector2().set(168, -19), 5);
 
 
     }
@@ -184,8 +183,8 @@ public class EntityFactory {
 
         Body wallBody = world.createBody(wallPoint);
         float dist = entity.getPos().dst(wallPos);
-        float width = 2.5f;
-        float height = 1.5f;
+        float width = 4.5f;
+        float height = 2f;
 
         Vector2 vec = entity.getPos();
         vec.sub(wallPos).nor();

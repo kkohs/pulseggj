@@ -13,6 +13,7 @@ import java.util.List;
 public class ApplicationContainer {
     private HashMap<String, Object> objects = new HashMap<>();
     private long currTime = 0;
+    private boolean newGame;
 
     private List<AbstractEntity> entitiesToDestroy = new ArrayList<>();
     private List<ActionEntity> actionEntitiesToSpawn = new ArrayList<>();
@@ -47,5 +48,13 @@ public class ApplicationContainer {
 
     public void addToSpawn(ActionEntity entity) {
         actionEntitiesToSpawn.add(entity);
+    }
+
+    public boolean isNewGame() {
+        return newGame;
+    }
+
+    public void setNewGame(boolean newGame) {
+        this.newGame = newGame;
     }
 }

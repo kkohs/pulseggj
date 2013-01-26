@@ -76,6 +76,9 @@ public class PulseGame extends Game {
 
     @Override
     public void render() {
+        if (applicationContainer.isNewGame()) {
+            create();
+        }
         logger.log();
         if (applicationContainer.getCurrTime() >= logTime) {    //todo remove
             Gdx.app.log("Body count: ", String.valueOf(physicsController.getWorld().getBodyCount()));
