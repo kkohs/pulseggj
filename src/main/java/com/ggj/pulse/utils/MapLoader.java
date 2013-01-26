@@ -44,7 +44,7 @@ public class MapLoader {
     private void createObjEmitters() {
         ObjEmitter emitter = new ObjEmitter();
         emitter.setPos(new Vector2(-75.734055f, 21.004189f));
-        emitter.setDirection(new Vector2(10, 11));
+        emitter.setDirection(new Vector2(15, 11));
         emitter.setEntityFactory(entityFactory);
         emitter.setApplicationContainer(applicationContainer);
         physicsController.getActionEntities().add(emitter);
