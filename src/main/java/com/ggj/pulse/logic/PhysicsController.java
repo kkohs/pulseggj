@@ -14,22 +14,22 @@ public class PhysicsController {
     private World world;
     private EntityFactory entityFactory;
 
-    private float step = 1000 / 60;
+    private float step = (float) (1.0 / 60.f);
 
     public PhysicsController() {
         world = new World(new Vector2(0, -20), true);
     }
 
     public void initialize() {
-        applicationContainer.put("world", world);
-        entityFactory.createStaticObject(40, 50, 10, 10, 3, "left");
-       entityFactory.createBox(150, 0, 10, 10, 3);
+        applicationContainer.put("physicsWorld", world);
+        AbstractEntity world = entityFactory.createStaticObject(40, 50, 10, 10, 3, "left");
+        applicationContainer.put("gameWorld", world);
         AbstractEntity entity = entityFactory.createPlayer(40, -10, 10, 10, 0);
-        applicationContainer.put("player",entity);
+        applicationContainer.put("player", entity);
     }
 
     public void update() {
-        world.step((float) (1.0/60.f), 10, 10);
+        world.step(step, 10, 10);
     }
 
 

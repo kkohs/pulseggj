@@ -19,7 +19,7 @@ public class GameScreen extends AbstractScreen {
     private Box2DDebugRenderer box2DDebugRenderer;
 
     public GameScreen() {
-        camera = new PerspectiveCamera(60, 1024, 768);
+        camera = new PerspectiveCamera(60, 1600, 900);
         box2DDebugRenderer = new Box2DDebugRenderer();
         camera.translate(50, 50, 200);
         camera.lookAt(50, 50, 0);
@@ -28,7 +28,7 @@ public class GameScreen extends AbstractScreen {
     }
 
     public void initialize() {
-        world = (World) applicationContainer.get("world");
+        world = (World) applicationContainer.get("physicsWorld");
         applicationContainer.put("gameCam", camera);
     }
 
