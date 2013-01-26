@@ -1,4 +1,4 @@
-package com.ggj.pulse.graphics;
+package com.ggj.pulse.entities;
 
 import com.badlogic.gdx.math.Vector2;
 import com.ggj.pulse.entities.AbstractEntity;

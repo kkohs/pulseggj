@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.physics.box2d.joints.RopeJointDef;
 import com.ggj.pulse.entities.AbstractEntity;
-import com.ggj.pulse.graphics.PlayerEntity;
+import com.ggj.pulse.entities.PlayerEntity;
 
 /**
  * @author Modris Vekmanis
