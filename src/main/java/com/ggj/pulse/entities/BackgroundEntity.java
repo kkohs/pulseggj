@@ -65,6 +65,6 @@ public class BackgroundEntity extends ActionEntity {
         sprite.setRotation((float) Math.toDegrees(getBody().getAngle()));
         sprite.setPosition(0,0);
 
-
-        sprite.draw(batch);    }
+        sprite.draw(batch);
+    }
 }

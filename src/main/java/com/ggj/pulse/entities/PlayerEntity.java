@@ -23,6 +23,7 @@ public class PlayerEntity extends ActionEntity {
     private Vector2 target = new Vector2();
     private static Vector3 coords = new Vector3();
 
+    private boolean render = true;
     private Sprite sprite;
     private boolean shouldMove;
 
@@ -35,6 +36,7 @@ public class PlayerEntity extends ActionEntity {
 
     public PlayerEntity(ApplicationContainer applicationContainer) {
         this.applicationContainer = applicationContainer;
+        setRenderOrder(1);
     }
 
     private List<BloodVesselEntity> anchors = new ArrayList<>();
@@ -89,11 +91,15 @@ public class PlayerEntity extends ActionEntity {
 
     @Override
     public void update() {
+        if(getPos().y < -90f) {
+            applicationContainer.destroyEntity(this);
+        }
         if(anchors.isEmpty())  {
             dead = true;
             World world = (World) applicationContainer.get("physicsWorld");
             if(centerJoint != null){
             world.destroyJoint(centerJoint);
+             getBody().setFixedRotation(false);
             centerJoint = null;
             }
             return;
@@ -116,19 +122,22 @@ public class PlayerEntity extends ActionEntity {
 
     @Override
     public void render(SpriteBatch batch, Camera camera, AssetManager assetManager, float scaleX, float scaleY) {
-        coords.set(getPos().x - 10, getPos().y - 10, 0);
+        if(!render) return;
+        coords.set(getPos().x - 20, getPos().y - 20, 0);
         camera.project(coords);
-        sprite.setSize(10 * scaleX * 2, 10 * scaleY * 2);
+        sprite.setSize(20 * scaleX * 2, 20 * scaleY * 2);
 
         sprite.setU(0);
         sprite.setV(0);
         sprite.setU2(1);
         sprite.setV2(1);
 
-        sprite.setOrigin(10 * scaleX , 10 * scaleY );
+        sprite.setOrigin(20 * scaleX , 20 * scaleY );
         sprite.setRotation((float) Math.toDegrees(getBody().getAngle()));
         sprite.setPosition(coords.x, coords.y);
 
 
-        sprite.draw(batch);    }
+        sprite.draw(batch);
+
+    }
 }

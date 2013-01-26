@@ -48,6 +48,7 @@ public class EntityFactory {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.density = density;
+        fixtureDef.friction = 1;
 
 
         Body body = world.createBody(bodyDef);
@@ -135,7 +136,7 @@ public class EntityFactory {
 
 
         Body body = world.createBody(bodyDef);
-         assetManager.attachShape(body, fixtureDef, 10, "heart");
+         assetManager.attachShape(body, fixtureDef, 40, "heart");
        // body.createFixture(fixtureDef);
         body.setAngularDamping(0.5f);
         body.setLinearDamping(0.05f);
@@ -179,8 +180,8 @@ public class EntityFactory {
 
         Body wallBody = world.createBody(wallPoint);
         float dist = entity.getPos().dst(wallPos);
-        float width = 2;
-        float height = 1f;
+        float width = 2.5f;
+        float height = 1.5f;
 
         Vector2 vec = entity.getPos();
         vec.sub(wallPos).nor();

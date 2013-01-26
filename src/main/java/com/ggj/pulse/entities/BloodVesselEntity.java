@@ -36,6 +36,7 @@ public class BloodVesselEntity extends ActionEntity {
 
     public BloodVesselEntity(ApplicationContainer applicationContainer) {
         this.applicationContainer = applicationContainer;
+        setRenderOrder(2);
     }
 
     public RopeJoint getJoint() {
@@ -130,7 +131,7 @@ public class BloodVesselEntity extends ActionEntity {
     public void update() {
         float currentDistance = anchorPoint.dst(parent.getPos());
         if (currentDistance > distance + 15) {
-            health -= 0.01 * currentDistance;
+            health -= 0.005 * currentDistance;
 
         }
         if (health < 0 && chain.isEmpty()) {
