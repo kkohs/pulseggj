@@ -92,6 +92,7 @@ public class EntityFactory {
         entity.setW(2 * halfWidth);
         entity.setH(2 * halfHeight);
         entity.getBody().setTransform(entity.getPos().x, entity.getPos().y, angle);
+        entity.getBody().setUserData(entity);
 
         applicationContainer.addToSpawn(entity);
         gameScreen.getVisibleEntities().add(entity);
@@ -108,6 +109,7 @@ public class EntityFactory {
         entity.setW(radius);
         entity.setH(radius);
         entity.getBody().setTransform(entity.getPos().x, entity.getPos().y, angle);
+        entity.getBody().setUserData(entity);
 
         gameScreen.getVisibleEntities().add(entity);
         applicationContainer.addToSpawn(entity);
@@ -143,7 +145,7 @@ public class EntityFactory {
         Fixture f = body.getFixtureList().get(0);
 
         entity.setBody(body);
-       entity.setSprite(new Sprite(assetManager.get("textures/pulseHeart.png", Texture.class)));
+        entity.setSprite(new Sprite(assetManager.get("textures/pulseHeart.png", Texture.class)));
         BodyDef centerDef = new BodyDef();
         centerDef.position.set(x, y);
         Body center = world.createBody(centerDef);
