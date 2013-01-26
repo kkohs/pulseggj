@@ -1,7 +1,9 @@
 package com.ggj.pulse.entities;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.ggj.pulse.ApplicationContainer;
+import com.ggj.pulse.utils.AssetManager;
 import com.ggj.pulse.utils.EntityFactory;
 
 import java.security.SecureRandom;
@@ -23,6 +25,8 @@ public class ObjEmitter extends ActionEntity {
 
     private long nextSpawn = 0;
     private long maxCdTime = 15000;
+
+    private Sound spawn;
 
     @Override
     public void update() {
@@ -48,6 +52,7 @@ public class ObjEmitter extends ActionEntity {
             vel.mul(random.nextFloat() * speedModifier / size);
             entity.getBody().applyForceToCenter(vel);
             nextSpawn = t + (long) (random.nextFloat() * (float) maxCdTime);
+            spawn.play();
         }
     }
 
@@ -57,6 +62,8 @@ public class ObjEmitter extends ActionEntity {
 
     public void setApplicationContainer(ApplicationContainer applicationContainer) {
         this.applicationContainer = applicationContainer;
+        spawn = applicationContainer.getAssetManager().get(AssetManager.SPAWN, Sound.class);
+        nextSpawn = System.currentTimeMillis() + (long) (random.nextFloat() * (float) maxCdTime);
     }
 
     public EntityFactory getEntityFactory() {

@@ -41,8 +41,10 @@ public class PulseGame extends Game {
         logicController = new LogicController();
         physicsController = new PhysicsController();
         gameScreen = new GameScreen();
-        assetManager = new AssetManager();
-        assetManager.initialize();
+        if (assetManager == null) {
+            assetManager = new AssetManager();
+            assetManager.initialize();
+        }
         entityFactory = new EntityFactory(assetManager, applicationContainer, physicsController);
 
         logicController.setApplicationContainer(applicationContainer);
