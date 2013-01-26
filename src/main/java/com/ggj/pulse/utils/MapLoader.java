@@ -42,36 +42,36 @@ public class MapLoader {
 
     private void createObjEmitters() {
         ObjEmitter emitter = new ObjEmitter();
-        emitter.setPos(new Vector2(-46.217644f, 33.4002f));
-        emitter.setDirection(new Vector2(4, 2));
+        emitter.setPos(new Vector2(-75.734055f, 21.004189f));
+        emitter.setDirection(new Vector2(10, 11));
         emitter.setEntityFactory(entityFactory);
         emitter.setApplicationContainer(applicationContainer);
         physicsController.getActionEntities().add(emitter);
 
         emitter = new ObjEmitter();
-        emitter.setPos(new Vector2(-34.42144f, 85.41081f));
-        emitter.setDirection(new Vector2(15, 5));
+        emitter.setPos(new Vector2(-59.568245f, 94.135216f));
+        emitter.setDirection(new Vector2(21, 9));
         emitter.setEntityFactory(entityFactory);
         emitter.setApplicationContainer(applicationContainer);
         physicsController.getActionEntities().add(emitter);
 
         emitter = new ObjEmitter();
-        emitter.setPos(new Vector2(26.294594f, 100.70863f));
+        emitter.setPos(new Vector2(30.241795f, 123.90083f));
         emitter.setDirection(new Vector2(1f, -5));
         emitter.setEntityFactory(entityFactory);
         emitter.setApplicationContainer(applicationContainer);
         physicsController.getActionEntities().add(emitter);
 
         emitter = new ObjEmitter();
-        emitter.setPos(new Vector2(114.294594f, 73.70863f));
-        emitter.setDirection(new Vector2(-4f, -5));
+        emitter.setPos(new Vector2(150.33064f, 90.029625f));
+        emitter.setDirection(new Vector2(-9f, -10));
         emitter.setEntityFactory(entityFactory);
         emitter.setApplicationContainer(applicationContainer);
         physicsController.getActionEntities().add(emitter);
 
         emitter = new ObjEmitter();
-        emitter.setPos(new Vector2(129.294594f, 44.70863f));
-        emitter.setDirection(new Vector2(-10f, 2));
+        emitter.setPos(new Vector2(181.63586f, 33.834194f));
+        emitter.setDirection(new Vector2(-15f, 5));
         emitter.setEntityFactory(entityFactory);
         emitter.setApplicationContainer(applicationContainer);
         physicsController.getActionEntities().add(emitter);

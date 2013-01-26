@@ -18,6 +18,7 @@ public class AbstractEntity {
     private boolean isStatic = false;
     private boolean renderable = false;
     private Body body;
+    private int renderOrder = 5;
 
     public void render(SpriteBatch batch, Camera camera, AssetManager assetManager, float scaleX, float scaleY) {
     }
@@ -55,5 +56,13 @@ public class AbstractEntity {
 
     public void setRenderable(boolean renderable) {
         this.renderable = renderable;
+    }
+
+    public int getRenderOrder() {
+        return renderOrder;
+    }
+
+    public void setRenderOrder(int renderOrder) {
+        this.renderOrder = renderOrder;
     }
 }

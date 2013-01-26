@@ -31,9 +31,9 @@ public class ObjEmitter extends ActionEntity {
             AbstractEntity entity;
             if (random.nextBoolean()) {
                 entity = entityFactory.createBox(getPos().x, getPos().y,
-                        random.nextFloat() * (maxSize - minSize) + minSize, random.nextFloat() * (maxSize - minSize) + minSize, 5);
+                        random.nextFloat() * (maxSize - minSize) + minSize, random.nextFloat() * (maxSize - minSize) + minSize, random.nextFloat() * 10);
             } else {
-                entity = entityFactory.createCircle(getPos().x, getPos().y, random.nextFloat() * (maxSize - minSize) + minSize, 1);
+                entity = entityFactory.createCircle(getPos().x, getPos().y, random.nextFloat() * (maxSize - minSize) + minSize, random.nextFloat() * 10);
             }
             Vector2 vel = new Vector2(vT);
             vel.mul((random.nextFloat() * maxOffset) - maxOffset / 2);

@@ -12,8 +12,7 @@ import com.ggj.pulse.ApplicationContainer;
 import com.ggj.pulse.entities.AbstractEntity;
 import com.ggj.pulse.utils.AssetManager;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Modris Vekmanis
@@ -26,7 +25,19 @@ public class GameScreen extends AbstractScreen {
     private Camera camera;
     private SpriteBatch batch;
     private Box2DDebugRenderer box2DDebugRenderer;
-    private List<AbstractEntity> visibleEntities = new LinkedList<>();
+    private List<AbstractEntity> visibleEntities = new ArrayList<>();
+
+    private Comparator<AbstractEntity> comparator = new Comparator<AbstractEntity>() {
+        @Override
+        public int compare(AbstractEntity o1, AbstractEntity o2) {
+            if (o1.getRenderOrder() == o2.getRenderOrder()) {
+                return 0;
+            } else if (o1.getRenderOrder() > o2.getRenderOrder()) {
+                return -1;
+            }
+            return 1;
+        }
+    };
 
     public GameScreen() {
         camera = new PerspectiveCamera(60, 1600, 900);
@@ -64,6 +75,8 @@ public class GameScreen extends AbstractScreen {
 
         float scaleX = x2 - x1;
         float scaleY = y2 - y1;
+
+        Collections.sort(visibleEntities, comparator);
 
         batch.begin();
         for (AbstractEntity entity : visibleEntities) {
