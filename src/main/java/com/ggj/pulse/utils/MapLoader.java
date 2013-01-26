@@ -20,9 +20,9 @@ public class MapLoader {
 
     public void loadLevel() {
         AbstractEntity world = entityFactory.createStaticObject(60, 40, 10, 10, 3, "map");
-        AbstractEntity pipes = entityFactory.createStaticObject(30, 40, 10, 10, 3, "pipe");
+        AbstractEntity pipes = entityFactory.createStaticObject(60, 40, 10, 10, 3, "pipes");
         applicationContainer.put("gameWorld", world);
-        applicationContainer.put("pipe", pipes);
+        applicationContainer.put("pipes", pipes);
         screen.getVisibleEntities().add(world);
        createObjEmitters();
         createPlayer();

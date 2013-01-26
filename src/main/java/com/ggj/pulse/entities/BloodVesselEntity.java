@@ -1,9 +1,12 @@
 package com.ggj.pulse.entities;
 
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.joints.RopeJoint;
 import com.ggj.pulse.ApplicationContainer;
+import com.ggj.pulse.utils.AssetManager;
 
 import java.util.LinkedList;
 
@@ -105,5 +108,10 @@ public class BloodVesselEntity extends ActionEntity {
         }
 
 
+    }
+
+    @Override
+    public void render(SpriteBatch batch, Camera camera, AssetManager assetManager, float scaleX, float scaleY) {
+        super.render(batch, camera, assetManager, scaleX, scaleY);    //To change body of overridden methods use File | Settings | File Templates.
     }
 }

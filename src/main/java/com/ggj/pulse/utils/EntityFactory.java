@@ -60,7 +60,7 @@ public class EntityFactory {
     public AbstractEntity createStaticObject(float x, float y, float halfWidth, float halfHeight, float angle, String bodyName) {
         BackgroundEntity entity = new BackgroundEntity();
         entity.setPos(new Vector2(x, y));
-
+      //  entity.setDraw(true);
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.x = entity.getPos().x;
         bodyDef.position.y = entity.getPos().y;
