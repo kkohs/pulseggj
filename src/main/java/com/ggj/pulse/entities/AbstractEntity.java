@@ -13,6 +13,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 public class AbstractEntity {
     private Vector2 pos;
     private boolean isStatic = false;
+    private boolean renderable = false;
     private Body body;
 
     public void render() {
@@ -44,5 +45,13 @@ public class AbstractEntity {
 
     public void setBody(Body body) {
         this.body = body;
+    }
+
+    public boolean isRenderable() {
+        return renderable;
+    }
+
+    public void setRenderable(boolean renderable) {
+        this.renderable = renderable;
     }
 }

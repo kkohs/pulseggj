@@ -23,6 +23,10 @@ public class LogicController {
             if (entity instanceof ActionEntity) {
                 physicsController.getActionEntities().remove(entity);
             }
+
+            if (entity.isRenderable()) {
+                gameScreen.getVisibleEntities().remove(entity);
+            }
         }
         applicationContainer.getEntitiesToDestroy().clear();
 
@@ -44,5 +48,13 @@ public class LogicController {
 
     public void setPhysicsController(PhysicsController physicsController) {
         this.physicsController = physicsController;
+    }
+
+    public GameScreen getGameScreen() {
+        return gameScreen;
+    }
+
+    public void setGameScreen(GameScreen gameScreen) {
+        this.gameScreen = gameScreen;
     }
 }
