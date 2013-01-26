@@ -56,6 +56,7 @@ public class InputController extends InputAdapter {
 
         mouseJoint = (MouseJoint)world.createJoint(def);
         playerEntity.getBody().setAwake(true);
+        playerEntity.setShouldMove(true);
         return true;
     }
 
@@ -77,9 +78,7 @@ public class InputController extends InputAdapter {
         if (mouseJoint != null) {
             world.destroyJoint(mouseJoint);
             mouseJoint = null;
-            for(RopeJoint ropeJoint : playerEntity.getAnchors()) {
-                ropeJoint.setMaxLength(2);
-            }
+            playerEntity.setShouldMove(false);
         }
         return super.touchUp(screenX, screenY, pointer, button);    //To change body of overridden methods use File | Settings | File Templates.
     }

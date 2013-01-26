@@ -47,6 +47,14 @@ public class PlayerEntity extends ActionEntity {
 
     @Override
     public void update() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        if(!shouldMove) {
+            for (RopeJoint ropeJoint : anchors) {
+                if(ropeJoint.getMaxLength() > 2){
+                ropeJoint.setMaxLength(ropeJoint.getMaxLength()- 1.0f);
+                } else {
+                    ropeJoint.setMaxLength(2);
+                }
+            }
+        }
     }
 }

@@ -16,9 +16,11 @@ public class MapLoader {
     private EntityFactory entityFactory;
 
     public void loadLevel() {
-        AbstractEntity world = entityFactory.createStaticObject(40, 50, 10, 10, 3, "left");
+        AbstractEntity world = entityFactory.createStaticObject(30, 40, 10, 10, 3, "map");
+        AbstractEntity pipes = entityFactory.createStaticObject(30, 40, 10, 10, 3, "pipes");
         applicationContainer.put("gameWorld", world);
-        createObjEmitters();
+        applicationContainer.put("pipes", pipes);
+        //createObjEmitters();
         createPlayer();
     }
 
@@ -26,6 +28,7 @@ public class MapLoader {
         PlayerEntity entity = entityFactory.createPlayer(40, 40, 10, 10, 0);
         entityFactory.attachRopes(entity);
         applicationContainer.put("player", entity);
+        physicsController.getActionEntities().add(entity);
     }
 
 
