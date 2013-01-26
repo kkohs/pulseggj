@@ -79,7 +79,7 @@ public class EntityFactory {
         ((PolygonShape) shape).setAsBox(halfWidth, halfHeight);
         RectangleEntity entity = new RectangleEntity();
         entity.setPos(new Vector2(x, y));
-        entity.setBody(createObject(entity, shape));
+        entity.setBody(createObject(entity, shape,0));
         entity.setW(2 * halfWidth);
         entity.setH(2 * halfHeight);
 
@@ -93,7 +93,7 @@ public class EntityFactory {
         shape.setRadius(radius);
         AbstractEntity entity = new AbstractEntity();
         entity.setPos(new Vector2(x, y));
-        entity.setBody(createObject(entity, shape));
+        entity.setBody(createObject(entity, shape,0));
 
         return entity;
     }
