@@ -183,7 +183,7 @@ public class EntityFactory {
 
         Body wallBody = world.createBody(wallPoint);
         float dist = entity.getPos().dst(wallPos);
-        float width = 4.5f;
+        float width = 3.5f;
         float height = 2f;
 
         Vector2 vec = entity.getPos();

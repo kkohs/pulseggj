@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Modris Vekmanis
@@ -31,6 +32,8 @@ public class GameScreen extends AbstractScreen {
     private SpriteBatch batch;
     private Box2DDebugRenderer box2DDebugRenderer;
     private List<AbstractEntity> visibleEntities = new ArrayList<>();
+    private long timeAlive;
+    private long previousUpdate;
 
     private Comparator<AbstractEntity> comparator = new Comparator<AbstractEntity>() {
         @Override
@@ -58,6 +61,8 @@ public class GameScreen extends AbstractScreen {
         world = (World) applicationContainer.get("physicsWorld");
         applicationContainer.put("gameCam", camera);
         batch = new SpriteBatch();
+        previousUpdate = System.currentTimeMillis();
+
     }
 
 
@@ -89,24 +94,31 @@ public class GameScreen extends AbstractScreen {
             Collections.sort(visibleEntities, comparator);
 
             batch.begin();
+            for (AbstractEntity entity : visibleEntities) {
+                entity.render(batch, camera, assetManager, scaleX, scaleY);
+
+            }
+
+
             if (player.isDead()) {
                 BitmapFont font = new BitmapFont();
                 font.scale(10);
-                Gdx.gl.glClearColor(0, 0, 0, 1);
 
                 font.draw(batch, "DEAD", 600, 500);
                 font = new BitmapFont();
+                font.scale(1);
+                font.draw(batch, "Survived for : " + TimeUnit.MILLISECONDS.toSeconds(timeAlive) + " seconds!!", 640, 320);
+
+                font = new BitmapFont();
                 font.scale(2);
-                font.draw(batch, "Press space for new game!", 570, 300);
+                font.draw(batch, "Press space for new game!", 570, 260);
 
 
             } else {
-                for (AbstractEntity entity : visibleEntities) {
-                    entity.render(batch, camera, assetManager, scaleX, scaleY);
-
-                }
-
+                timeAlive += applicationContainer.getCurrTime() - previousUpdate;
+                previousUpdate = applicationContainer.getCurrTime();
             }
+
             batch.end();
         }
 
