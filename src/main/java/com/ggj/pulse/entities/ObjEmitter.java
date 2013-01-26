@@ -13,8 +13,8 @@ import java.security.SecureRandom;
  */
 public class ObjEmitter extends ActionEntity {
     private static SecureRandom random = new SecureRandom();
-    private static float maxSize = 10f;
-    private static float minSize = 4f;
+    private static float maxSize = 7f;
+    private static float minSize = 3f;
     private static float speedModifier = 1000000;
 
     private ApplicationContainer applicationContainer;
@@ -32,7 +32,7 @@ public class ObjEmitter extends ActionEntity {
     public void update() {
         long t = applicationContainer.getCurrTime();
         if (t >= nextSpawn) {
-            if (maxCdTime > 2000) maxCdTime -= 500;
+            if (maxCdTime > 5000) maxCdTime -= 500;
             float size = 0;
             AbstractEntity entity;
             if (random.nextBoolean()) {
@@ -46,6 +46,7 @@ public class ObjEmitter extends ActionEntity {
                 ((CircleEntity) entity).setText(random.nextInt(3));
             }
             size *= .005;
+            entity.setBodySize(size);
 
             Vector2 vel = new Vector2(vT);
             vel.mul((random.nextFloat() * maxOffset) - maxOffset / 2);
@@ -90,10 +91,5 @@ public class ObjEmitter extends ActionEntity {
 
     public void setMaxCdTime(long maxCdTime) {
         this.maxCdTime = maxCdTime;
-    }
-
-    @Override
-    float getBodySize() {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }
