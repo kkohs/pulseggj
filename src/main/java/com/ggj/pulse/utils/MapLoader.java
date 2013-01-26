@@ -19,6 +19,7 @@ public class MapLoader {
         AbstractEntity world = entityFactory.createStaticObject(40, 50, 10, 10, 3, "left");
         applicationContainer.put("gameWorld", world);
         createObjEmitters();
+        createPlayer();
     }
 
     public void createPlayer() {
