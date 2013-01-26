@@ -2,6 +2,7 @@ package com.ggj.pulse.entities;
 
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -181,12 +182,16 @@ public class PlayerEntity extends ActionEntity {
         sprite.setPosition(coords.x, coords.y);
 
         BitmapFont font = new BitmapFont();
-        StringBuilder builder = new StringBuilder();
-        builder.append("Heart health " + getHealth() + "\n");
+        int y = 100;
+        font.draw(batch, "Heart health: " + getHealth() + "\n", 40, y);
         for (BloodVesselEntity entity : anchors) {
-            builder.append("Blood vessel health health " + entity.getHealth() + "\n");
+            y -= 20;
+            font = new BitmapFont();
+            if (entity.getHealth() != entity.getLastHealth()) {
+                font.setColor(Color.RED);
+            }
+            font.draw(batch, "Blood vessel health health: " + entity.getHealth() + "\n", 40, y);
         }
-        font.drawMultiLine(batch, builder.toString(), 40, 120);
         sprite.draw(batch);
 
     }

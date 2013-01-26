@@ -98,10 +98,12 @@ public class GameScreen extends AbstractScreen {
                 entity.render(batch, camera, assetManager, scaleX, scaleY);
 
             }
-
+            BitmapFont font = new BitmapFont();
+            font.scale(1);
+            font.draw(batch, "Time alive: " + TimeUnit.MILLISECONDS.toSeconds(timeAlive), 50, 880);
 
             if (player.isDead()) {
-                BitmapFont font = new BitmapFont();
+                font = new BitmapFont();
                 font.scale(10);
 
                 font.draw(batch, "DEAD", 600, 500);
