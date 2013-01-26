@@ -55,6 +55,8 @@ public class PulseGame extends Game {
         inputController = new InputController(applicationContainer);
 
         entityFactory.setWorld(physicsController.getWorld());
+        entityFactory.setGameScreen(gameScreen);
+        gameScreen.setAssetManager(assetManager);
 
         physicsController.initialize();
         gameScreen.initialize();

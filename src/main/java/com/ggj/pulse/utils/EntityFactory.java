@@ -10,6 +10,8 @@ import com.ggj.pulse.ApplicationContainer;
 import com.ggj.pulse.entities.AbstractEntity;
 import com.ggj.pulse.entities.BloodVesselEntity;
 import com.ggj.pulse.entities.PlayerEntity;
+import com.ggj.pulse.entities.RectangleEntity;
+import com.ggj.pulse.graphics.GameScreen;
 
 /**
  * @author Modris Vekmanis
@@ -17,6 +19,7 @@ import com.ggj.pulse.entities.PlayerEntity;
 public class EntityFactory {
     private World world;
     private AssetManager assetManager;
+    private GameScreen gameScreen;
     private ApplicationContainer applicationContainer;
 
     public EntityFactory(AssetManager assetManager, ApplicationContainer applicationContainer) {
@@ -74,9 +77,13 @@ public class EntityFactory {
     public AbstractEntity createBox(float x, float y, float halfWidth, float halfHeight, float angle) {
         Shape shape = new PolygonShape();
         ((PolygonShape) shape).setAsBox(halfWidth, halfHeight);
-        AbstractEntity entity = new AbstractEntity();
+        RectangleEntity entity = new RectangleEntity();
         entity.setPos(new Vector2(x, y));
-        entity.setBody(createObject(entity, shape, 0));
+        entity.setBody(createObject(entity, shape));
+        entity.setW(2 * halfWidth);
+        entity.setH(2 * halfHeight);
+
+        gameScreen.getVisibleEntities().add(entity);
 
         return entity;
     }
@@ -86,7 +93,7 @@ public class EntityFactory {
         shape.setRadius(radius);
         AbstractEntity entity = new AbstractEntity();
         entity.setPos(new Vector2(x, y));
-        entity.setBody(createObject(entity, shape, 0));
+        entity.setBody(createObject(entity, shape));
 
         return entity;
     }
@@ -102,8 +109,8 @@ public class EntityFactory {
         entity.setBody(body);
 
         BodyDef centerDef = new BodyDef();
-        centerDef.position.set(x, y);
-        Body center = world.createBody(centerDef);
+        centerDef.position.set(x,y);
+       Body center =   world.createBody(centerDef);
         RopeJointDef ropeJointDef = new RopeJointDef();
         ropeJointDef.maxLength = 0;
         ropeJointDef.bodyA = center;
@@ -173,11 +180,16 @@ public class EntityFactory {
         entity.addAnchor(bloodVesselEntity);
     }
 
+
     public World getWorld() {
         return world;
     }
 
     public void setWorld(World world) {
         this.world = world;
+    }
+
+    public void setGameScreen(GameScreen gameScreen) {
+        this.gameScreen = gameScreen;
     }
 }
