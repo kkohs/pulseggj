@@ -61,14 +61,14 @@ public class PulseGame extends Game {
         physicsController.initialize();
         gameScreen.initialize();
 
-        physicsController.getWorld().setContactListener(new GameContactListener());
+        physicsController.getWorld().setContactListener(new GameContactListener(applicationContainer));
         physicsController.getWorld().setContactFilter(new GameContactFilter());
 
         MapLoader mapLoader = new MapLoader();
         mapLoader.setEntityFactory(entityFactory);
         mapLoader.setPhysicsController(physicsController);
         mapLoader.setApplicationContainer(applicationContainer);
-       mapLoader.setScreen(gameScreen);
+        mapLoader.setScreen(gameScreen);
         mapLoader.loadLevel();
 
         this.setScreen(gameScreen);

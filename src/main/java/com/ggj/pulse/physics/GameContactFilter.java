@@ -10,16 +10,18 @@ import com.ggj.pulse.entities.BloodVesselEntity;
 public class GameContactFilter implements ContactFilter {
     @Override
     public boolean shouldCollide(Fixture fixtureA, Fixture fixtureB) {
-        if(fixtureA.getBody().getUserData() instanceof BloodVesselEntity && fixtureB.getBody().getUserData() instanceof BloodVesselEntity) {
+        if (fixtureA.getBody().getUserData() instanceof BloodVesselEntity && fixtureB.getBody().getUserData() instanceof BloodVesselEntity) {
             return ((BloodVesselEntity) fixtureA.getBody().getUserData()).getGrpIndex() == ((BloodVesselEntity) fixtureB.getBody().getUserData()).getGrpIndex();
         }
 
-        if(fixtureA.getBody().getUserData() instanceof BloodVesselEntity && !( fixtureB.getBody().getUserData() instanceof BloodVesselEntity)){
+        if (fixtureA.getBody().getUserData() instanceof BloodVesselEntity && !(fixtureB.getBody().getUserData() instanceof BloodVesselEntity)) {
             return false;
         }
-        if(fixtureB.getBody().getUserData() instanceof BloodVesselEntity && !( fixtureA.getBody().getUserData() instanceof BloodVesselEntity)){
+        if (fixtureB.getBody().getUserData() instanceof BloodVesselEntity && !(fixtureA.getBody().getUserData() instanceof BloodVesselEntity)) {
             return false;
         }
         return true;
     }
+
+
 }

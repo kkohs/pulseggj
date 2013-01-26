@@ -72,7 +72,7 @@ public class EntityFactory {
         bodyDef.type = BodyDef.BodyType.StaticBody;
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.density = 2;
-            entity.setTexture(new Sprite(assetManager.get(AssetManager.BACK_GROUND, Texture.class),1600,900));
+        entity.setTexture(new Sprite(assetManager.get(AssetManager.BACK_GROUND, Texture.class), 1600, 900));
         Body body = world.createBody(bodyDef);
         assetManager.attachShape(body, fixtureDef, 400, bodyName);
         body.setAngularDamping(0.5f);
@@ -93,6 +93,7 @@ public class EntityFactory {
         entity.setH(2 * halfHeight);
         entity.getBody().setTransform(entity.getPos().x, entity.getPos().y, angle);
         entity.getBody().setUserData(entity);
+        entity.setRenderable(true);
 
         applicationContainer.addToSpawn(entity);
         gameScreen.getVisibleEntities().add(entity);
@@ -110,7 +111,7 @@ public class EntityFactory {
         entity.setH(radius);
         entity.getBody().setTransform(entity.getPos().x, entity.getPos().y, angle);
         entity.getBody().setUserData(entity);
-
+        entity.setRenderable(true);
         gameScreen.getVisibleEntities().add(entity);
         applicationContainer.addToSpawn(entity);
         return entity;
@@ -138,13 +139,14 @@ public class EntityFactory {
 
 
         Body body = world.createBody(bodyDef);
-         assetManager.attachShape(body, fixtureDef, 40, "heart");
-       // body.createFixture(fixtureDef);
+        assetManager.attachShape(body, fixtureDef, 40, "heart");
+        // body.createFixture(fixtureDef);
         body.setAngularDamping(0.5f);
         body.setLinearDamping(0.05f);
         Fixture f = body.getFixtureList().get(0);
 
         entity.setBody(body);
+        body.setUserData(entity);
         entity.setSprite(new Sprite(assetManager.get("textures/pulseHeart.png", Texture.class)));
         BodyDef centerDef = new BodyDef();
         centerDef.position.set(x, y);
@@ -187,19 +189,19 @@ public class EntityFactory {
 
         Vector2 vec = entity.getPos();
         vec.sub(wallPos).nor();
-        int count = (int) ((dist / width) );
+        int count = (int) ((dist / width));
 
         Body previous = wallBody;
         bloodVesselEntity.setWidth(width);
         bloodVesselEntity.setHeight(height);
         bloodVesselEntity.setSprite(new Sprite(assetManager.get(AssetManager.CHAIN_TEXTURE, Texture.class)));
-         bloodVesselEntity.setRender(true);
+        bloodVesselEntity.setRender(true);
         for (int i = 1; i < count; i++) {
             BloodVesselEntity e = new BloodVesselEntity(applicationContainer);
             e.setPos(vec.tmp().mul(i * width).add(wallPos));
             PolygonShape shape = new PolygonShape();
             shape.setAsBox(width, height);
-            e.setBody(createObject(e, shape, vec.angle() * MathUtils.degreesToRadians, false,1));
+            e.setBody(createObject(e, shape, vec.angle() * MathUtils.degreesToRadians, false, 1));
             e.getBody().setUserData(e);
             e.setGrpIndex(index);
 

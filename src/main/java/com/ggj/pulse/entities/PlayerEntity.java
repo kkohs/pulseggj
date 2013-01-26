@@ -35,6 +35,7 @@ public class PlayerEntity extends ActionEntity {
 
     private boolean dead;
 
+    private float health = 100;
     private RopeJoint centerJoint;
 
     private ApplicationContainer applicationContainer;
@@ -95,15 +96,38 @@ public class PlayerEntity extends ActionEntity {
         this.sprite = sprite;
     }
 
+    public float getHealth() {
+        return health;
+    }
+
+    public void setHealth(float health) {
+        this.health = health;
+    }
+
     @Override
     public void update() {
         pulseTime++;
-
+        setPulseSpeed(anchors.size());
         if (getPos().y < -90f) {
             applicationContainer.destroyEntity(this);
         }
+        if (health < 0) {
+            dead = true;
+            hasPulse = false;
+            World world = (World) applicationContainer.get("physicsWorld");
+            for (BloodVesselEntity entity : anchors) {
+                entity.setHealth(-1);
+            }
+            if (centerJoint != null) {
+                world.destroyJoint(centerJoint);
+                getBody().setFixedRotation(false);
+                centerJoint = null;
+            }
+            return;
+        }
         if (anchors.isEmpty()) {
             dead = true;
+            hasPulse = false;
             World world = (World) applicationContainer.get("physicsWorld");
             if (centerJoint != null) {
                 world.destroyJoint(centerJoint);

@@ -131,7 +131,7 @@ public class BloodVesselEntity extends ActionEntity {
     public void update() {
         float currentDistance = anchorPoint.dst(parent.getPos());
         if (currentDistance > distance + 15) {
-            health -= 0.005 * currentDistance;
+            health -= 0.001 * currentDistance;
 
         }
         if (health < 0 && chain.isEmpty()) {
@@ -160,8 +160,8 @@ public class BloodVesselEntity extends ActionEntity {
                 sprite.setV2(1);
                 sprite.setRotation((float) Math.toDegrees(e.getBody().getAngle()));
                 sprite.setPosition(coords.x, coords.y);
-                sprite.setOrigin(width * scaleX , width * scaleY );
-                sprite.setSize(width*scaleX*2,height*scaleY*2);
+                sprite.setOrigin(width * scaleX * 2, width * scaleY * 2);
+                sprite.setSize(width * scaleX * 2, height * scaleY * 2);
                 sprite.draw(batch);
             }
         }
