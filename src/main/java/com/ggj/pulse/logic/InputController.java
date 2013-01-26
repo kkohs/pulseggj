@@ -1,6 +1,7 @@
 package com.ggj.pulse.logic;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector2;
@@ -31,6 +32,7 @@ public class InputController extends InputAdapter {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        if(button != Input.Buttons.LEFT) return false;
         Camera camera = (Camera) applicationContainer.get("gameCam");
         World world = (World) applicationContainer.get("physicsWorld");
        this.pointer.set(screenX, screenY, 0);
@@ -49,6 +51,7 @@ public class InputController extends InputAdapter {
         def.maxForce = 1000.0f * playerEntity.getBody().getMass();
 
         mouseJoint = (MouseJoint)world.createJoint(def);
+        mouseJoint.setTarget(new Vector2().set(this.pointer.x,this.pointer.y));
         playerEntity.getBody().setAwake(true);
         playerEntity.setShouldMove(true);
         return true;
@@ -64,9 +67,10 @@ public class InputController extends InputAdapter {
         return false;
     }
 
-    //TODO mouse joint 2button bug
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        if(button != Input.Buttons.LEFT) return false;
+
         World world = (World) applicationContainer.get("physicsWorld");
         PlayerEntity playerEntity = (PlayerEntity) applicationContainer.get("player");
 

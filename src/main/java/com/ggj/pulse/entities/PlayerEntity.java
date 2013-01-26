@@ -1,6 +1,7 @@
 package com.ggj.pulse.entities;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.joints.RopeJoint;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,9 @@ public class PlayerEntity extends ActionEntity {
     private Vector2 target = new Vector2();
 
     private boolean shouldMove;
+
+
+    private RopeJoint centerJoint;
 
 
     private List<BloodVesselEntity> anchors = new ArrayList<>();
@@ -43,10 +47,21 @@ public class PlayerEntity extends ActionEntity {
         anchors.add(ropeJoint);
     }
 
+    public RopeJoint getCenterJoint() {
+        return centerJoint;
+    }
+
+    public void setCenterJoint(RopeJoint centerJoint) {
+        this.centerJoint = centerJoint;
+    }
+
     @Override
     public void update() {
         if(!shouldMove) {
-          // getBody().setAwake(false);
+            if(centerJoint.getMaxLength() > 2)
+           centerJoint.setMaxLength(centerJoint.getMaxLength() - .8f);
+        }  else {
+            centerJoint.setMaxLength(100);
         }
     }
 }

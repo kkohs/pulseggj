@@ -1,11 +1,6 @@
 package com.ggj.pulse.logic;
 
 import com.ggj.pulse.ApplicationContainer;
-import com.ggj.pulse.entities.ActionEntity;
-import com.ggj.pulse.entities.ObjEmitter;
-
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * @author Modris Vekmanis

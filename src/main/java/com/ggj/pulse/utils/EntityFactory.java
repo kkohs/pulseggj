@@ -98,6 +98,17 @@ public class EntityFactory {
 
         Body body = createObject(entity, shape);
         entity.setBody(body);
+
+        BodyDef centerDef = new BodyDef();
+        centerDef.position.set(x,y);
+       Body center =   world.createBody(centerDef);
+        RopeJointDef ropeJointDef = new RopeJointDef();
+        ropeJointDef.maxLength = 0;
+        ropeJointDef.bodyA = center;
+        ropeJointDef.bodyB = body;
+
+        entity.setCenterJoint((RopeJoint) world.createJoint(ropeJointDef));
+
         return entity;
     }
 
