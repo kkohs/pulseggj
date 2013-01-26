@@ -20,7 +20,7 @@ public class MapLoader {
         AbstractEntity pipes = entityFactory.createStaticObject(30, 40, 10, 10, 3, "pipes");
         applicationContainer.put("gameWorld", world);
         applicationContainer.put("pipes", pipes);
-        //createObjEmitters();
+        createObjEmitters();
         createPlayer();
     }
 
