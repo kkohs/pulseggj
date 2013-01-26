@@ -1,6 +1,7 @@
 package com.ggj.pulse.utils;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -26,6 +27,7 @@ public class AssetManager extends com.badlogic.gdx.assets.AssetManager {
     public static final String ENEMY_THREE = "textures/enemy3.png";
     public static final String ENEMY_FOUR = "textures/enemy4.png";
     public static final String BACK_GROUND = "textures/pulseLevelBackground.png";
+    public static final String HEARTBEAT = "heartbeat-01.mp3";
 
     private BodyEditorLoader bodyEditorLoader;
 
@@ -41,6 +43,7 @@ public class AssetManager extends com.badlogic.gdx.assets.AssetManager {
         this.load(ENEMY_THREE, Texture.class);
         this.load("textures/pulseHeart.png", Texture.class);
         this.load(CHAIN_TEXTURE, Texture.class);
+        this.load(HEARTBEAT, Sound.class);
         this.finishLoading();
     }
 

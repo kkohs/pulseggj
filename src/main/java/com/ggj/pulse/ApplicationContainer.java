@@ -2,6 +2,7 @@ package com.ggj.pulse;
 
 import com.ggj.pulse.entities.AbstractEntity;
 import com.ggj.pulse.entities.ActionEntity;
+import com.ggj.pulse.utils.AssetManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,6 +13,7 @@ import java.util.List;
  */
 public class ApplicationContainer {
     private HashMap<String, Object> objects = new HashMap<>();
+    private AssetManager assetManager;
     private long currTime = 0;
     private boolean newGame;
 
@@ -56,5 +58,13 @@ public class ApplicationContainer {
 
     public void setNewGame(boolean newGame) {
         this.newGame = newGame;
+    }
+
+    public AssetManager getAssetManager() {
+        return assetManager;
+    }
+
+    public void setAssetManager(AssetManager assetManager) {
+        this.assetManager = assetManager;
     }
 }

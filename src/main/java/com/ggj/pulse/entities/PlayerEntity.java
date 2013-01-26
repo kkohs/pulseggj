@@ -1,6 +1,8 @@
 package com.ggj.pulse.entities;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -26,7 +28,7 @@ public class PlayerEntity extends ActionEntity {
     private boolean render = true;
     private Sprite sprite;
     private boolean shouldMove;
-    private int pulse = 45;
+    private int pulse = 30;
     private int pulseTime = 0;
     private int pulseSpeed = 3;
     private boolean hasPulse = true;
@@ -36,8 +38,11 @@ public class PlayerEntity extends ActionEntity {
     private ApplicationContainer applicationContainer;
     private List<BloodVesselEntity> anchors = new ArrayList<>();
 
+    private Sound beat;
+
     public PlayerEntity(ApplicationContainer applicationContainer) {
         this.applicationContainer = applicationContainer;
+        beat = applicationContainer.getAssetManager().get(AssetManager.HEARTBEAT, Sound.class);
         setRenderOrder(1);
     }
 
@@ -157,8 +162,13 @@ public class PlayerEntity extends ActionEntity {
         coords.set(getPos().x - 20, getPos().y - 20, 0);
         camera.project(coords);
         if (hasPulse) {
-            sprite.setSize(20 * scaleX * 2 - (pulseTime % pulse) / pulseSpeed, 20 * scaleY * 2 - (pulseTime % pulse) / pulseSpeed);
+            sprite.setSize(20 * scaleX * 2 - (pulseTime % (pulse + pulseSpeed * 5)), 20 * scaleY * 2 - (pulseTime % (pulse + pulseSpeed * 5)));
+            if ((pulseTime % (pulse + pulseSpeed * 5)) == 0) {
+                beat.stop();
+                beat.play();
+            }
         } else {
+            beat.stop();
             sprite.setSize(20 * scaleX * 2, 20 * scaleY * 2);
         }
 
