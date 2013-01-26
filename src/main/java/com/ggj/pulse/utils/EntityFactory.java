@@ -83,7 +83,7 @@ public class EntityFactory {
         ((PolygonShape) shape).setAsBox(halfWidth, halfHeight);
         RectangleEntity entity = new RectangleEntity();
         entity.setPos(new Vector2(x, y));
-        entity.setBody(createObject(entity, shape,0));
+        entity.setBody(createObject(entity, shape, 0));
         entity.setW(2 * halfWidth);
         entity.setH(2 * halfHeight);
 
@@ -95,9 +95,13 @@ public class EntityFactory {
     public AbstractEntity createCircle(float x, float y, float radius, float angle) {
         CircleShape shape = new CircleShape();
         shape.setRadius(radius);
-        AbstractEntity entity = new AbstractEntity();
+        CircleEntity entity = new CircleEntity();
         entity.setPos(new Vector2(x, y));
-        entity.setBody(createObject(entity, shape,0));
+        entity.setBody(createObject(entity, shape, 0));
+        entity.setW(radius);
+        entity.setH(radius);
+
+        gameScreen.getVisibleEntities().add(entity);
 
         return entity;
     }
@@ -113,8 +117,8 @@ public class EntityFactory {
         entity.setBody(body);
 
         BodyDef centerDef = new BodyDef();
-        centerDef.position.set(x,y);
-       Body center =   world.createBody(centerDef);
+        centerDef.position.set(x, y);
+        Body center = world.createBody(centerDef);
         RopeJointDef ropeJointDef = new RopeJointDef();
         ropeJointDef.maxLength = 0;
         ropeJointDef.bodyA = center;
@@ -127,7 +131,7 @@ public class EntityFactory {
 
     public void attachRopes(PlayerEntity entity) {
         Vector2 pos = new Vector2();
-        createRope(entity,new Vector2().set(-70, 48), 1);
+        createRope(entity, new Vector2().set(-70, 48), 1);
         createRope(entity, new Vector2().set(126, -19), 2);
         createRope(entity, new Vector2().set(54, 112), 3);
        // createRope(entity, new Vector2().set(68, 97), 4);

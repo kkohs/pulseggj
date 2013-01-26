@@ -30,6 +30,7 @@ public class AssetManager extends com.badlogic.gdx.assets.AssetManager {
         //load("TEDTURENAMVE", Texture.class);
         this.load("textures/New Bitmap Image.bmp", Texture.class);
         this.load("textures/levelProgressReport.jpg", Texture.class);
+        this.load("textures/New Bitmap Image (2).png", Texture.class);
         this.finishLoading();
     }
 
