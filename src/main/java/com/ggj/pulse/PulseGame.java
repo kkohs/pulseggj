@@ -8,6 +8,7 @@ import com.ggj.pulse.logic.LogicController;
 import com.ggj.pulse.logic.PhysicsController;
 import com.ggj.pulse.utils.AssetManager;
 import com.ggj.pulse.utils.EntityFactory;
+import com.ggj.pulse.utils.MapLoader;
 
 /**
  * Created with IntelliJ IDEA.
@@ -51,8 +52,12 @@ public class PulseGame extends Game {
         physicsController.initialize();
         gameScreen.initialize();
 
-        //MainScreen screen = new MainScreen();
-        //screen.setGraphicsController(graphicsController);
+        MapLoader mapLoader = new MapLoader();
+        mapLoader.setEntityFactory(entityFactory);
+        mapLoader.setPhysicsController(physicsController);
+        mapLoader.setApplicationContainer(applicationContainer);
+        mapLoader.loadLevel();
+
         this.setScreen(gameScreen);
     }
 
