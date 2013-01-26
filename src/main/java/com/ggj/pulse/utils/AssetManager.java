@@ -1,6 +1,7 @@
 package com.ggj.pulse.utils;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -26,6 +27,8 @@ public class AssetManager extends com.badlogic.gdx.assets.AssetManager {
         bodyEditorLoader = new BodyEditorLoader(Gdx.files.internal("map"));
 
         //load("TEDTURENAMVE", Texture.class);
+        this.load("textures/New Bitmap Image.bmp", Texture.class);
+        this.finishLoading();
     }
 
     public Sprite getSprite(String name) {

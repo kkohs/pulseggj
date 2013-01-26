@@ -8,6 +8,8 @@ import com.ggj.pulse.ApplicationContainer;
 import com.ggj.pulse.entities.AbstractEntity;
 import com.ggj.pulse.entities.BloodVesselEntity;
 import com.ggj.pulse.entities.PlayerEntity;
+import com.ggj.pulse.entities.RectangleEntity;
+import com.ggj.pulse.graphics.GameScreen;
 
 /**
  * @author Modris Vekmanis
@@ -15,6 +17,7 @@ import com.ggj.pulse.entities.PlayerEntity;
 public class EntityFactory {
     private World world;
     private AssetManager assetManager;
+    private GameScreen gameScreen;
     private ApplicationContainer applicationContainer;
 
     public EntityFactory(AssetManager assetManager, ApplicationContainer applicationContainer) {
@@ -72,9 +75,13 @@ public class EntityFactory {
     public AbstractEntity createBox(float x, float y, float halfWidth, float halfHeight, float angle) {
         Shape shape = new PolygonShape();
         ((PolygonShape) shape).setAsBox(halfWidth, halfHeight);
-        AbstractEntity entity = new AbstractEntity();
+        RectangleEntity entity = new RectangleEntity();
         entity.setPos(new Vector2(x, y));
         entity.setBody(createObject(entity, shape));
+        entity.setW(2 * halfWidth);
+        entity.setH(2 * halfHeight);
+
+        gameScreen.getVisibleEntities().add(entity);
 
         return entity;
     }
@@ -100,8 +107,8 @@ public class EntityFactory {
         entity.setBody(body);
 
         BodyDef centerDef = new BodyDef();
-        centerDef.position.set(x,y);
-       Body center =   world.createBody(centerDef);
+        centerDef.position.set(x, y);
+        Body center = world.createBody(centerDef);
         RopeJointDef ropeJointDef = new RopeJointDef();
         ropeJointDef.maxLength = 0;
         ropeJointDef.bodyA = center;
@@ -115,20 +122,19 @@ public class EntityFactory {
     public void attachRopes(PlayerEntity entity) {
         BloodVesselEntity vesselEntity = new BloodVesselEntity(applicationContainer);
         BodyDef vesselBodyDef1 = new BodyDef();
-        vesselBodyDef1.position.set(-70,48);
+        vesselBodyDef1.position.set(-70, 48);
         Body vesselBody1 = world.createBody(vesselBodyDef1);
         RopeJointDef ropeJointDef = new RopeJointDef();
         ropeJointDef.bodyB = entity.getBody();
         ropeJointDef.bodyA = vesselBody1;
         ropeJointDef.maxLength = 150f;
-        RopeJoint ropeJoint = (RopeJoint)  world.createJoint(ropeJointDef);
+        RopeJoint ropeJoint = (RopeJoint) world.createJoint(ropeJointDef);
         vesselEntity.setBody(vesselBody1);
         vesselEntity.setParent(entity);
         vesselEntity.setDistance(entity.getPos().dst(vesselBody1.getPosition()));
         vesselEntity.setHealth(100f);
         vesselEntity.setJoint(ropeJoint);
         vesselEntity.setAnchorPoint(vesselBody1.getPosition());
-
 
 
         BloodVesselEntity vesselEntity2 = new BloodVesselEntity(applicationContainer);
@@ -139,7 +145,7 @@ public class EntityFactory {
         ropeJointDef2.bodyB = entity.getBody();
         ropeJointDef2.bodyA = vesselBody1;
         ropeJointDef2.maxLength = 150f;
-        RopeJoint ropeJoint2 = (RopeJoint)  world.createJoint(ropeJointDef2);
+        RopeJoint ropeJoint2 = (RopeJoint) world.createJoint(ropeJointDef2);
         vesselEntity2.setBody(vesselBody2);
         vesselEntity2.setParent(entity);
         vesselEntity2.setDistance(entity.getPos().dst(vesselBody2.getPosition()));
@@ -148,16 +154,15 @@ public class EntityFactory {
         vesselEntity2.setAnchorPoint(vesselBody2.getPosition());
 
 
-
         BloodVesselEntity vesselEntity3 = new BloodVesselEntity(applicationContainer);
         BodyDef vesselBodyDef3 = new BodyDef();
-        vesselBodyDef3.position.set(126,-19);
+        vesselBodyDef3.position.set(126, -19);
         Body vesselBody3 = world.createBody(vesselBodyDef3);
         RopeJointDef ropeJointDef3 = new RopeJointDef();
         ropeJointDef3.bodyB = entity.getBody();
         ropeJointDef3.bodyA = vesselBody3;
         ropeJointDef3.maxLength = 150f;
-        RopeJoint ropeJoint3 = (RopeJoint)  world.createJoint(ropeJointDef3);
+        RopeJoint ropeJoint3 = (RopeJoint) world.createJoint(ropeJointDef3);
         vesselEntity3.setBody(vesselBody3);
         vesselEntity3.setParent(entity);
         vesselEntity3.setDistance(entity.getPos().dst(vesselBody3.getPosition()));
@@ -166,17 +171,15 @@ public class EntityFactory {
         vesselEntity3.setAnchorPoint(vesselBody3.getPosition());
 
 
-
-
         BloodVesselEntity vesselEntity4 = new BloodVesselEntity(applicationContainer);
         BodyDef vesselBodyDef4 = new BodyDef();
-        vesselBodyDef4.position.set(54,112);
+        vesselBodyDef4.position.set(54, 112);
         Body vesselBody4 = world.createBody(vesselBodyDef4);
         RopeJointDef ropeJointDef4 = new RopeJointDef();
         ropeJointDef4.bodyB = entity.getBody();
         ropeJointDef4.bodyA = vesselBody4;
         ropeJointDef4.maxLength = 150f;
-        RopeJoint ropeJoint4 = (RopeJoint)  world.createJoint(ropeJointDef4);
+        RopeJoint ropeJoint4 = (RopeJoint) world.createJoint(ropeJointDef4);
         vesselEntity4.setBody(vesselBody4);
         vesselEntity4.setParent(entity);
         vesselEntity4.setDistance(entity.getPos().dst(vesselBody4.getPosition()));
@@ -185,18 +188,15 @@ public class EntityFactory {
         vesselEntity4.setAnchorPoint(vesselBody4.getPosition());
 
 
-
-
-
         BloodVesselEntity vesselEntity5 = new BloodVesselEntity(applicationContainer);
         BodyDef vesselBodyDef5 = new BodyDef();
-        vesselBodyDef5.position.set(68,97);
+        vesselBodyDef5.position.set(68, 97);
         Body vesselBody5 = world.createBody(vesselBodyDef5);
         RopeJointDef ropeJointDef5 = new RopeJointDef();
         ropeJointDef5.bodyB = entity.getBody();
         ropeJointDef5.bodyA = vesselBody5;
         ropeJointDef5.maxLength = 150f;
-        RopeJoint ropeJoint5 = (RopeJoint)  world.createJoint(ropeJointDef5);
+        RopeJoint ropeJoint5 = (RopeJoint) world.createJoint(ropeJointDef5);
         vesselEntity5.setBody(vesselBody5);
         vesselEntity5.setParent(entity);
         vesselEntity5.setDistance(entity.getPos().dst(vesselBody5.getPosition()));
@@ -205,23 +205,21 @@ public class EntityFactory {
         vesselEntity5.setAnchorPoint(vesselBody5.getPosition());
 
 
-
         BloodVesselEntity vesselEntity6 = new BloodVesselEntity(applicationContainer);
         BodyDef vesselBodyDef6 = new BodyDef();
-        vesselBodyDef6.position.set(155,70);
+        vesselBodyDef6.position.set(155, 70);
         Body vesselBody6 = world.createBody(vesselBodyDef6);
         RopeJointDef ropeJointDef6 = new RopeJointDef();
         ropeJointDef6.bodyB = entity.getBody();
         ropeJointDef6.bodyA = vesselBody6;
         ropeJointDef6.maxLength = 150f;
-        RopeJoint ropeJoint6 = (RopeJoint)  world.createJoint(ropeJointDef6);
+        RopeJoint ropeJoint6 = (RopeJoint) world.createJoint(ropeJointDef6);
         vesselEntity6.setBody(vesselBody6);
         vesselEntity6.setParent(entity);
         vesselEntity6.setDistance(entity.getPos().dst(vesselBody6.getPosition()));
         vesselEntity6.setHealth(100f);
         vesselEntity6.setJoint(ropeJoint6);
         vesselEntity6.setAnchorPoint(vesselBody6.getPosition());
-
 
 
         entity.addAnchor(vesselEntity);
@@ -241,5 +239,9 @@ public class EntityFactory {
 
     public void setWorld(World world) {
         this.world = world;
+    }
+
+    public void setGameScreen(GameScreen gameScreen) {
+        this.gameScreen = gameScreen;
     }
 }

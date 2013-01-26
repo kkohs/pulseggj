@@ -1,7 +1,10 @@
 package com.ggj.pulse.entities;
 
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.ggj.pulse.utils.AssetManager;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,8 +19,7 @@ public class AbstractEntity {
     private boolean renderable = false;
     private Body body;
 
-    public void render() {
-
+    public void render(SpriteBatch batch, Camera camera, AssetManager assetManager, float scaleX, float scaleY) {
     }
 
     public Vector2 getPos() {
