@@ -30,6 +30,7 @@ public class AssetManager extends com.badlogic.gdx.assets.AssetManager {
     public static final String HEARTBEAT = "heartbeat-01.mp3";
     public static final String CORRUPTION = "futuresoundfx-14.mp3";
     public static final String SPAWN = "Swoosh03.mp3";
+    public static final String SPRING = "Spring-Boing.mp3";
 
     private BodyEditorLoader bodyEditorLoader;
 
@@ -48,6 +49,7 @@ public class AssetManager extends com.badlogic.gdx.assets.AssetManager {
         this.load(HEARTBEAT, Sound.class);
         this.load(CORRUPTION, Sound.class);
         this.load(SPAWN, Sound.class);
+        this.load(SPRING, Sound.class);
         this.finishLoading();
     }
 

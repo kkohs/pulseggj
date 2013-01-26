@@ -1,5 +1,6 @@
 package com.ggj.pulse.entities;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -33,10 +34,13 @@ public class BloodVesselEntity extends ActionEntity {
     private Vector2 anchorPoint;
     private RopeJoint joint;
 
+    private boolean soundPlayed = false;
+    private Sound spring;
 
     public BloodVesselEntity(ApplicationContainer applicationContainer) {
         this.applicationContainer = applicationContainer;
         setRenderOrder(2);
+        spring = applicationContainer.getAssetManager().get(AssetManager.SPRING, Sound.class);
     }
 
     public RopeJoint getJoint() {
@@ -138,6 +142,10 @@ public class BloodVesselEntity extends ActionEntity {
             applicationContainer.destroyEntity(this);
             parent.getAnchors().remove(this);
         } else if (health < 0) {
+            if (!soundPlayed) {
+                soundPlayed = true;
+                spring.play();
+            }
             World world = (World) applicationContainer.get("physicsWorld");
             world.destroyBody(chain.removeFirst().getBody());
         }
