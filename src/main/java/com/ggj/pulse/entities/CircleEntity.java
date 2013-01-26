@@ -27,7 +27,7 @@ public class CircleEntity extends ActionEntity {
     public void render(SpriteBatch batch, Camera camera, AssetManager assetManager, float scaleX, float scaleY) {
         coords.set(getPos().x - w, getPos().y - h, 0);
         camera.project(coords);
-        sprite.setTexture(assetManager.get(AssetManager.ENEMY_ONE, Texture.class));
+        sprite.setTexture(assetManager.get(AssetManager.ENEMY_TWO, Texture.class));
         sprite.setSize(w * scaleX * 2, h * scaleY * 2);
 
         sprite.setU(0);
