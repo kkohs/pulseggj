@@ -11,7 +11,6 @@ import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
 import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
 import com.badlogic.gdx.physics.box2d.joints.RopeJoint;
 import com.ggj.pulse.ApplicationContainer;
-import com.ggj.pulse.entities.AbstractEntity;
 import com.ggj.pulse.entities.PlayerEntity;
 
 /**
@@ -41,7 +40,7 @@ public class InputController extends InputAdapter {
         PlayerEntity playerEntity = (PlayerEntity) applicationContainer.get("player");
 
         for(RopeJoint ropeJoint : playerEntity.getAnchors()) {
-            ropeJoint.setMaxLength(100);
+            ropeJoint.setMaxLength(1000);
         }
 
         this.pointer.set(screenX, screenY,0);

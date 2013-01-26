@@ -88,7 +88,7 @@ public class EntityFactory {
 
     public void attachRopes(PlayerEntity entity) {
        BodyDef anchorDef = new BodyDef();
-        anchorDef.position.set(entity.getPos().x, entity.getPos().y -8);
+        anchorDef.position.set(-70,48);
     //    anchorDef.type = BodyDef.BodyType.StaticBody;
 
         Body anchor = world.createBody(anchorDef);
@@ -101,7 +101,7 @@ public class EntityFactory {
         RopeJoint ropeJoint = (RopeJoint)  world.createJoint(ropeJointDef);
 
         anchorDef = new BodyDef();
-        anchorDef.position.set(entity.getPos().x -8, entity.getPos().y);
+        anchorDef.position.set( -70, 58);
    //     anchorDef.type = BodyDef.BodyType.StaticBody;
 
          anchor = world.createBody(anchorDef);
@@ -116,7 +116,7 @@ public class EntityFactory {
         entity.addAnchor(ropeJoint);
 
         anchorDef = new BodyDef();
-        anchorDef.position.set(entity.getPos().x + 8, entity.getPos().y);
+        anchorDef.position.set(154, 71);
     //    anchorDef.type = BodyDef.BodyType.StaticBody;
 
          anchor = world.createBody(anchorDef);
@@ -131,7 +131,39 @@ public class EntityFactory {
         entity.addAnchor(ropeJoint);
 
         anchorDef = new BodyDef();
-        anchorDef.position.set(entity.getPos().x, entity.getPos().y +8);
+        anchorDef.position.set(126,-19);
+   //     anchorDef.type = BodyDef.BodyType.StaticBody;
+
+         anchor = world.createBody(anchorDef);
+
+
+        ropeJointDef = new RopeJointDef();
+        ropeJointDef.bodyB = entity.getBody();
+        ropeJointDef.bodyA = anchor;
+        ropeJointDef.maxLength = 100f;
+
+        ropeJoint = (RopeJoint)  world.createJoint(ropeJointDef);
+        entity.addAnchor(ropeJoint);
+
+
+        anchorDef = new BodyDef();
+        anchorDef.position.set(54,112);
+   //     anchorDef.type = BodyDef.BodyType.StaticBody;
+
+         anchor = world.createBody(anchorDef);
+
+
+        ropeJointDef = new RopeJointDef();
+        ropeJointDef.bodyB = entity.getBody();
+        ropeJointDef.bodyA = anchor;
+        ropeJointDef.maxLength = 100f;
+
+        ropeJoint = (RopeJoint)  world.createJoint(ropeJointDef);
+        entity.addAnchor(ropeJoint);
+
+
+        anchorDef = new BodyDef();
+        anchorDef.position.set(68,97);
    //     anchorDef.type = BodyDef.BodyType.StaticBody;
 
          anchor = world.createBody(anchorDef);

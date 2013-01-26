@@ -2,7 +2,6 @@ package com.ggj.pulse.entities;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.joints.RopeJoint;
-import com.ggj.pulse.entities.AbstractEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,13 +47,7 @@ public class PlayerEntity extends ActionEntity {
     @Override
     public void update() {
         if(!shouldMove) {
-            for (RopeJoint ropeJoint : anchors) {
-                if(ropeJoint.getMaxLength() > 2){
-                ropeJoint.setMaxLength(ropeJoint.getMaxLength()- 1.0f);
-                } else {
-                    ropeJoint.setMaxLength(2);
-                }
-            }
+           getBody().setAwake(false);
         }
     }
 }
