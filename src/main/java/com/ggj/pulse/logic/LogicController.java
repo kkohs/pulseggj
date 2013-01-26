@@ -1,15 +1,31 @@
 package com.ggj.pulse.logic;
 
 import com.ggj.pulse.ApplicationContainer;
+import com.ggj.pulse.entities.AbstractEntity;
+import com.ggj.pulse.entities.ActionEntity;
+import com.ggj.pulse.entities.BloodVesselEntity;
+import com.ggj.pulse.graphics.GameScreen;
 
 /**
  * @author Modris Vekmanis
  */
 public class LogicController {
     private ApplicationContainer applicationContainer;
+    private GameScreen gameScreen;
     private PhysicsController physicsController;
 
     public void update() {
+
+        for (AbstractEntity entity : applicationContainer.getEntitiesToDestroy()) {
+            if (entity instanceof BloodVesselEntity) {
+                physicsController.getWorld().destroyJoint(((BloodVesselEntity) entity).getJoint());
+            }
+            if (entity instanceof ActionEntity) {
+                physicsController.getActionEntities().remove(entity);
+            }
+        }
+        applicationContainer.getEntitiesToDestroy().clear();
+
         applicationContainer.setCurrTime(System.currentTimeMillis());
         physicsController.update();
     }

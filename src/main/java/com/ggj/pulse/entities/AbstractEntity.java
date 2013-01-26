@@ -10,10 +10,14 @@ import com.badlogic.gdx.physics.box2d.Body;
  * Time: 20:42
  * To change this template use File | Settings | File Templates.
  */
-public class AbstractEntity{
+public class AbstractEntity {
     private Vector2 pos;
     private boolean isStatic = false;
     private Body body;
+
+    public void render() {
+
+    }
 
     public Vector2 getPos() {
         if (body != null && pos != null) {

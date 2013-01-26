@@ -33,15 +33,6 @@ public class PhysicsController {
     }
 
     public void update() {
-        for(AbstractEntity entity : applicationContainer.getEntitiesToDestroy()) {
-            if(entity instanceof BloodVesselEntity) {
-                world.destroyJoint(((BloodVesselEntity) entity).getJoint());
-            }
-            if(entity instanceof ActionEntity) {
-                actionEntities.remove(entity);
-            }
-        }
-        applicationContainer.getEntitiesToDestroy().clear();
         for (ActionEntity entity : actionEntities) {
             entity.update();
         }
