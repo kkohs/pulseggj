@@ -2,6 +2,7 @@ package com.ggj.pulse.utils;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.joints.RopeJoint;
 import com.badlogic.gdx.physics.box2d.joints.RopeJointDef;
 import com.ggj.pulse.entities.AbstractEntity;
 import com.ggj.pulse.entities.PlayerEntity;
@@ -73,29 +74,76 @@ public class EntityFactory {
 
     }
 
-    public AbstractEntity createPlayer(float x, float y, float halfWidth, float halfHeight, float angle) {
+    public PlayerEntity createPlayer(float x, float y, float halfWidth, float halfHeight, float angle) {
         PlayerEntity entity = new PlayerEntity();
         entity.setPos(new Vector2(x,y));
         entity.setStatic(false);
         CircleShape shape = new CircleShape();
-        shape.setRadius(10);
+        shape.setRadius(4);
 
         Body body = createObject(entity,shape);
-
-        BodyDef invisBodyDef = new BodyDef();
-        invisBodyDef.position.set(50,50);
-        invisBodyDef.type = BodyDef.BodyType.StaticBody;
-        Body invis = world.createBody(invisBodyDef);
-
-        RopeJointDef ropeJointDef = new RopeJointDef();
-        ropeJointDef.bodyA = invis;
-        ropeJointDef.bodyB = body;
-
-        world.createJoint(ropeJointDef);
+        entity.setBody(body);
         return entity;
     }
 
     public void attachRopes(PlayerEntity entity) {
+       BodyDef anchorDef = new BodyDef();
+        anchorDef.position.set(entity.getPos().x, entity.getPos().y -8);
+    //    anchorDef.type = BodyDef.BodyType.StaticBody;
+
+        Body anchor = world.createBody(anchorDef);
+
+
+        RopeJointDef ropeJointDef = new RopeJointDef();
+        ropeJointDef.bodyB = entity.getBody();
+        ropeJointDef.bodyA = anchor;
+        ropeJointDef.maxLength = 100f;
+        RopeJoint ropeJoint = (RopeJoint)  world.createJoint(ropeJointDef);
+
+        anchorDef = new BodyDef();
+        anchorDef.position.set(entity.getPos().x -8, entity.getPos().y);
+   //     anchorDef.type = BodyDef.BodyType.StaticBody;
+
+         anchor = world.createBody(anchorDef);
+         entity.addAnchor(ropeJoint);
+
+        ropeJointDef = new RopeJointDef();
+        ropeJointDef.bodyB = entity.getBody();
+        ropeJointDef.bodyA = anchor;
+        ropeJointDef.maxLength = 100f;
+
+        ropeJoint = (RopeJoint) world.createJoint(ropeJointDef);
+        entity.addAnchor(ropeJoint);
+
+        anchorDef = new BodyDef();
+        anchorDef.position.set(entity.getPos().x + 8, entity.getPos().y);
+    //    anchorDef.type = BodyDef.BodyType.StaticBody;
+
+         anchor = world.createBody(anchorDef);
+
+
+        ropeJointDef = new RopeJointDef();
+        ropeJointDef.bodyB = entity.getBody();
+        ropeJointDef.bodyA = anchor;
+        ropeJointDef.maxLength = 100f;
+
+        ropeJoint = (RopeJoint) world.createJoint(ropeJointDef);
+        entity.addAnchor(ropeJoint);
+
+        anchorDef = new BodyDef();
+        anchorDef.position.set(entity.getPos().x, entity.getPos().y +8);
+   //     anchorDef.type = BodyDef.BodyType.StaticBody;
+
+         anchor = world.createBody(anchorDef);
+
+
+        ropeJointDef = new RopeJointDef();
+        ropeJointDef.bodyB = entity.getBody();
+        ropeJointDef.bodyA = anchor;
+        ropeJointDef.maxLength = 100f;
+
+        ropeJoint = (RopeJoint)  world.createJoint(ropeJointDef);
+        entity.addAnchor(ropeJoint);
 
     }
 

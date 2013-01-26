@@ -2,6 +2,7 @@ package com.ggj.pulse;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
+import com.badlogic.gdx.graphics.FPSLogger;
 import com.ggj.pulse.graphics.GameScreen;
 import com.ggj.pulse.logic.InputController;
 import com.ggj.pulse.logic.LogicController;
@@ -26,11 +27,12 @@ public class PulseGame extends Game {
     private EntityFactory entityFactory;
     private InputController inputController;
 
+    private FPSLogger logger;
     private AssetManager assetManager;
 
     @Override
     public void create() {
-
+       logger = new FPSLogger();
         applicationContainer = new ApplicationContainer();
         logicController = new LogicController();
         physicsController = new PhysicsController();
@@ -63,6 +65,7 @@ public class PulseGame extends Game {
 
     @Override
     public void render() {
+        logger.log();
         logicController.update();
         super.render();
     }

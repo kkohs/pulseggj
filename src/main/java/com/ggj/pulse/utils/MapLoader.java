@@ -2,7 +2,9 @@ package com.ggj.pulse.utils;
 
 import com.badlogic.gdx.math.Vector2;
 import com.ggj.pulse.ApplicationContainer;
+import com.ggj.pulse.entities.AbstractEntity;
 import com.ggj.pulse.entities.ObjEmitter;
+import com.ggj.pulse.entities.PlayerEntity;
 import com.ggj.pulse.logic.PhysicsController;
 
 /**
@@ -14,11 +16,21 @@ public class MapLoader {
     private EntityFactory entityFactory;
 
     public void loadLevel() {
-        createObjEmmitters();
+        AbstractEntity world = entityFactory.createStaticObject(40, 50, 10, 10, 3, "left");
+        applicationContainer.put("gameWorld", world);
+        createObjEmitters();
+    }
+
+    public void createPlayer() {
+        PlayerEntity entity = entityFactory.createPlayer(40, 40, 10, 10, 0);
+        entityFactory.attachRopes(entity);
+        applicationContainer.put("player", entity);
     }
 
 
-    private void createObjEmmitters() {
+
+
+    private void createObjEmitters() {
         ObjEmitter emitter = new ObjEmitter();
         emitter.setPos(new Vector2(0, 0));
         emitter.setDirection(new Vector2(1, 2));

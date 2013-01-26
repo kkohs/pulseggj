@@ -16,6 +16,9 @@ public class AbstractEntity {
     private Body body;
 
     public Vector2 getPos() {
+        if (body != null && pos != null) {
+            pos.set(body.getPosition());
+        }
         return pos;
     }
 
