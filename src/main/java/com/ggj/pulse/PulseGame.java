@@ -99,7 +99,7 @@ public class PulseGame extends Game {
             font.scale(6);
             startBatch.begin();
 
-            font.draw(startBatch, "Press ENTER to start!", Gdx.graphics.getWidth() / 2 - font.getBounds("Press ENTER to start!").width / 2, Gdx.graphics.getHeight() / 2 + font.getBounds("Press ENTER to start!").height + 100);
+            font.draw(startBatch, "Press ENTER to start!", Gdx.graphics.getWidth() / 2 - font.getBounds("Press ENTER to start!").width / 2, Gdx.graphics.getHeight() / 2 + font.getBounds("Press ENTER to start!").height);
             startBatch.end();
 
             Gdx.input.setInputProcessor(new InputAdapter() {
