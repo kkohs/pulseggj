@@ -19,6 +19,7 @@ import com.ggj.pulse.physics.GameContactListener;
 import com.ggj.pulse.utils.AssetManager;
 import com.ggj.pulse.utils.EntityFactory;
 import com.ggj.pulse.utils.MapLoader;
+import org.lwjgl.opengl.DisplayMode;
 
 /**
  * Created with IntelliJ IDEA.
@@ -139,5 +140,13 @@ public class PulseGame extends Game {
             super.render();
 
         }
+    public static void main(String[] args) {
+        LwjglApplicationConfiguration configuration = new LwjglApplicationConfiguration();
+        configuration.resizable = false;
+        configuration.useGL20 = true;
+        configuration.width = 1366;
+        configuration.height = 768;
+
+        new LwjglApplication(new PulseGame(), configuration);
     }
 }

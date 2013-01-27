@@ -13,8 +13,8 @@ import java.security.SecureRandom;
  */
 public class ObjEmitter extends ActionEntity {
     private static SecureRandom random = new SecureRandom();
-    private static float maxSize = 7f;
-    private static float minSize = 3f;
+    private static float maxSize = 5f;
+    private static float minSize = 1f;
     private static float speedModifier = 1000000;
 
     private ApplicationContainer applicationContainer;
@@ -37,7 +37,7 @@ public class ObjEmitter extends ActionEntity {
             AbstractEntity entity;
             if (random.nextBoolean()) {
                 float dx = random.nextFloat() * (maxSize - minSize) + minSize;
-                float dy = random.nextFloat() * (maxSize - minSize) + minSize;
+                float dy = 5 * dx * random.nextFloat() + 2;
                 size = (dx + dy) / 2;
                 entity = entityFactory.createBox(getPos().x, getPos().y, dx, dy, random.nextFloat() * 10);
                 ((RectangleEntity) entity).setText(random.nextInt(5));
