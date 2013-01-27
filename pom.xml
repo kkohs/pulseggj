@@ -67,6 +67,12 @@
             <artifactId>gdx</artifactId>
             <version>${lib.gdx.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.badlogic</groupId>
+            <artifactId>body-loader</artifactId>
+            <version>${lib.gdx.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.badlogic</groupId>
             <artifactId>gdx</artifactId>
