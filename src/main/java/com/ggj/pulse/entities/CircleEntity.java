@@ -42,6 +42,14 @@ public class CircleEntity extends ActionEntity {
                 sprite.setTexture(assetManager.get(AssetManager.ENEMY_FOUR, Texture.class));
                 break;
             }
+            case 3: {
+                sprite.setTexture(assetManager.get(AssetManager.ENEMY_NINE, Texture.class));
+                break;
+            }
+            case 4: {
+                sprite.setTexture(assetManager.get(AssetManager.ENEMY_TEN, Texture.class));
+                break;
+            }
         }
 
 

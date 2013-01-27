@@ -17,6 +17,8 @@ public class RectangleEntity extends ActionEntity {
     private float w, h;
     private ApplicationContainer applicationContainer;
 
+    private int text = 0;
+
     public RectangleEntity(ApplicationContainer applicationContainer) {
         this.applicationContainer = applicationContainer;
     }
@@ -25,7 +27,30 @@ public class RectangleEntity extends ActionEntity {
     public void render(SpriteBatch batch, Camera camera, AssetManager assetManager, float scaleX, float scaleY) {
         coords.set(getPos().x - w / 2, getPos().y - h / 2, 0);
         camera.project(coords);
-        sprite.setTexture(assetManager.get(AssetManager.ENEMY_ONE, Texture.class));
+
+        switch (text) {
+            case 0: {
+                sprite.setTexture(assetManager.get(AssetManager.ENEMY_ONE, Texture.class));
+                break;
+            }
+            case 1: {
+                sprite.setTexture(assetManager.get(AssetManager.ENEMY_FIVE, Texture.class));
+                break;
+            }
+            case 2: {
+                sprite.setTexture(assetManager.get(AssetManager.ENEMY_SIX, Texture.class));
+                break;
+            }
+            case 3: {
+                sprite.setTexture(assetManager.get(AssetManager.ENEMY_SEVEN, Texture.class));
+                break;
+            }
+            case 4: {
+                sprite.setTexture(assetManager.get(AssetManager.ENEMY_EIGHT, Texture.class));
+                break;
+            }
+        }
+
         sprite.setSize(w * scaleX, h * scaleY);
 
         sprite.setU(0);
@@ -62,5 +87,13 @@ public class RectangleEntity extends ActionEntity {
         if (getPos().y < -90f) {
             applicationContainer.destroyEntity(this);
         }
+    }
+
+    public int getText() {
+        return text;
+    }
+
+    public void setText(int text) {
+        this.text = text;
     }
 }

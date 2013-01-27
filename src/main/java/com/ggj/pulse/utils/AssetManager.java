@@ -26,6 +26,12 @@ public class AssetManager extends com.badlogic.gdx.assets.AssetManager {
     public static final String ENEMY_TWO = "textures/enemy1.png";
     public static final String ENEMY_THREE = "textures/enemy3.png";
     public static final String ENEMY_FOUR = "textures/enemy4.png";
+    public static final String ENEMY_FIVE = "textures/enemy5.png";
+    public static final String ENEMY_SIX = "textures/enemy6.png";
+    public static final String ENEMY_SEVEN = "textures/enemy7.png";
+    public static final String ENEMY_EIGHT = "textures/enemy8.png";
+    public static final String ENEMY_NINE = "textures/enemy9.png";
+    public static final String ENEMY_TEN = "textures/enemy10.png";
     public static final String BACK_GROUND = "textures/pulseLevelBackground.png";
     public static final String HEARTBEAT = "heartbeat-01.mp3";
     public static final String CORRUPTION = "futuresoundfx-14.mp3";
@@ -44,6 +50,12 @@ public class AssetManager extends com.badlogic.gdx.assets.AssetManager {
         this.load(ENEMY_ONE, Texture.class);
         this.load(ENEMY_FOUR, Texture.class);
         this.load(ENEMY_THREE, Texture.class);
+        this.load(ENEMY_FIVE, Texture.class);
+        this.load(ENEMY_SIX, Texture.class);
+        this.load(ENEMY_SEVEN, Texture.class);
+        this.load(ENEMY_EIGHT, Texture.class);
+        this.load(ENEMY_NINE, Texture.class);
+        this.load(ENEMY_TEN, Texture.class);
         this.load("textures/pulseHeart.png", Texture.class);
         this.load(CHAIN_TEXTURE, Texture.class);
         this.load(HEARTBEAT, Sound.class);

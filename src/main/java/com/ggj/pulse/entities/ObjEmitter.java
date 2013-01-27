@@ -40,6 +40,7 @@ public class ObjEmitter extends ActionEntity {
                 float dy = random.nextFloat() * (maxSize - minSize) + minSize;
                 size = (dx + dy) / 2;
                 entity = entityFactory.createBox(getPos().x, getPos().y, dx, dy, random.nextFloat() * 10);
+                ((RectangleEntity) entity).setText(random.nextInt(5));
             } else {
                 size = random.nextFloat() * (maxSize * 1.5f - minSize) + minSize;
                 entity = entityFactory.createCircle(getPos().x, getPos().y, size, random.nextFloat() * 10);
