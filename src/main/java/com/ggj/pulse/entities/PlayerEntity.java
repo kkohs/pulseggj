@@ -95,6 +95,7 @@ public class PlayerEntity extends ActionEntity {
     }
 
     public float getHealth() {
+        if (health <= 0) return 0;
         return health;
     }
 

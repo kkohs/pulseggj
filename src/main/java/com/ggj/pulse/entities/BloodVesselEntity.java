@@ -62,11 +62,16 @@ public class BloodVesselEntity extends ActionEntity {
     }
 
     public float getHealth() {
+        if (health < 0) return 0;
         return health;
     }
 
     public void setHealth(float health) {
-        this.health = health;
+        if (this.health < 0) {
+            this.health = 0;
+        } else {
+            this.health = health;
+        }
     }
 
     public float getDistance() {
