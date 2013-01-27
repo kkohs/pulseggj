@@ -24,6 +24,7 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <finalName>PULSE-GGJ-2013</finalName>
                     <appendAssemblyId>false</appendAssemblyId>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
