@@ -31,12 +31,12 @@ public class GameContactListener implements ContactListener {
             if (a instanceof PlayerEntity && !(b instanceof BloodVesselEntity) && !(b instanceof PlayerEntity)) {
                 ((PlayerEntity) a).setHealth(((PlayerEntity) a).getHealth() - b.getBodySize() * 150);
                 applicationContainer.destroyEntity(b);
-                if (((PlayerEntity) a).isHasPulse()) collision.play();
+                if (((PlayerEntity) a).isHasPulse()) collision.play(0.5f);
             }
             if (b instanceof PlayerEntity && !(a instanceof BloodVesselEntity) && !(a instanceof PlayerEntity)) {
                 ((PlayerEntity) b).setHealth(((PlayerEntity) b).getHealth() - b.getBodySize() * 150);
                 applicationContainer.destroyEntity(a);
-                if (((PlayerEntity) b).isHasPulse()) collision.play();
+                if (((PlayerEntity) b).isHasPulse()) collision.play(0.5f);
             }
         }
 
