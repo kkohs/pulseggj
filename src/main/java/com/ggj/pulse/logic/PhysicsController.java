@@ -1,16 +1,15 @@
 package com.ggj.pulse.logic;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.ggj.pulse.ApplicationContainer;
 import com.ggj.pulse.entities.AbstractEntity;
 import com.ggj.pulse.entities.ActionEntity;
-import com.ggj.pulse.entities.BloodVesselEntity;
 import com.ggj.pulse.utils.EntityFactory;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -44,7 +43,7 @@ public class PhysicsController {
         for (ActionEntity entity : actionEntities) {
             entity.update();
         }
-        world.step(step, 10, 10);
+        world.step(Gdx.graphics.getDeltaTime(), 10, 10);
     }
 
 

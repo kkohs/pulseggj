@@ -138,6 +138,7 @@ public class PulseGame extends Game {
         configuration.useGL20 = true;
         configuration.width = 1366;
         configuration.height = 768;
+        configuration.fullscreen = true;
 
         new LwjglApplication(new PulseGame(), configuration);
     }
