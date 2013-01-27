@@ -19,7 +19,6 @@ import com.ggj.pulse.physics.GameContactListener;
 import com.ggj.pulse.utils.AssetManager;
 import com.ggj.pulse.utils.EntityFactory;
 import com.ggj.pulse.utils.MapLoader;
-import org.lwjgl.opengl.DisplayMode;
 
 /**
  * Created with IntelliJ IDEA.
@@ -40,16 +39,6 @@ public class PulseGame extends Game {
     private AssetManager assetManager;
     private long logTime = 0;
     private boolean started;
-
-    public static void main(String[] args) {
-        LwjglApplicationConfiguration configuration = new LwjglApplicationConfiguration();
-        configuration.resizable = false;
-        configuration.width = 1900;
-        configuration.height = 1050;
-        configuration.useGL20 = true;
-        configuration.fullscreen = false;
-        new LwjglApplication(new PulseGame(), configuration);
-    }
 
     @Override
     public void create() {
@@ -107,7 +96,7 @@ public class PulseGame extends Game {
         if (!started) {
             Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
             BitmapFont font = new BitmapFont();
-            font.scale(10);
+            font.scale(6);
             startBatch.begin();
 
             font.draw(startBatch, "Press ENTER to start!", Gdx.graphics.getWidth() / 2 - font.getBounds("Press ENTER to start!").width / 2, Gdx.graphics.getHeight() / 2 + font.getBounds("Press ENTER to start!").height + 100);
@@ -140,6 +129,8 @@ public class PulseGame extends Game {
             super.render();
 
         }
+    }
+
     public static void main(String[] args) {
         LwjglApplicationConfiguration configuration = new LwjglApplicationConfiguration();
         configuration.resizable = false;
