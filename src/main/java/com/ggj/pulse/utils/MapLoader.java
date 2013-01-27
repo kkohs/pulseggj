@@ -72,7 +72,7 @@ public class MapLoader {
 
         emitter = new ObjEmitter();
         emitter.setPos(new Vector2(181.63586f, 33.834194f));
-        emitter.setDirection(new Vector2(-15f, 5));
+        emitter.setDirection(new Vector2(-150f, 50));
         emitter.setEntityFactory(entityFactory);
         emitter.setApplicationContainer(applicationContainer);
         physicsController.getActionEntities().add(emitter);

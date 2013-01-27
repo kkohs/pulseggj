@@ -15,7 +15,7 @@ public class ObjEmitter extends ActionEntity {
     private static SecureRandom random = new SecureRandom();
     private static float maxSize = 8f;
     private static float minSize = 6f;
-    private static float speedModifier = 1000000;
+    private static float speedModifier = 10000000;
 
     private ApplicationContainer applicationContainer;
     private EntityFactory entityFactory;
@@ -46,7 +46,7 @@ public class ObjEmitter extends ActionEntity {
                 entity = entityFactory.createCircle(getPos().x, getPos().y, size, random.nextFloat() * 10);
                 ((CircleEntity) entity).setText(random.nextInt(3));
             }
-            size *= .005;
+            size *= .00005;
             entity.setBodySize(size);
 
             Vector2 vel = new Vector2(vT);
