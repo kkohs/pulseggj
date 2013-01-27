@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -24,7 +26,7 @@ import java.util.concurrent.TimeUnit;
  * @author Modris Vekmanis
  */
 public class GameScreen extends AbstractScreen {
-
+    private Sprite endGame;
     private ApplicationContainer applicationContainer;
     private AssetManager assetManager;
     private World world;
@@ -62,7 +64,7 @@ public class GameScreen extends AbstractScreen {
         applicationContainer.put("gameCam", camera);
         batch = new SpriteBatch();
         previousUpdate = System.currentTimeMillis();
-
+        endGame = new Sprite(assetManager.get(AssetManager.GAME_OVER, Texture.class));
     }
 
 
@@ -103,10 +105,9 @@ public class GameScreen extends AbstractScreen {
             font.draw(batch, "Time alive: " + TimeUnit.MILLISECONDS.toSeconds(timeAlive), 50, Gdx.graphics.getHeight() - 20);
 
             if (player.isDead()) {
-                font = new BitmapFont();
-                font.scale(10);
-
-                font.draw(batch, "DEAD", Gdx.graphics.getWidth() / 2 - font.getBounds("DEAD").width / 2, Gdx.graphics.getHeight() / 2 + font.getBounds("DEAD").height + 100);
+                endGame.setSize(400, 200);
+                endGame.setPosition(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2);
+                endGame.draw(batch);
                 font = new BitmapFont();
                 font.scale(1);
                 String text = "Survived for : " + TimeUnit.MILLISECONDS.toSeconds(timeAlive) + " seconds!!";

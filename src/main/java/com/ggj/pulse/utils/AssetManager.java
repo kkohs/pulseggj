@@ -22,6 +22,7 @@ import java.util.HashMap;
 public class AssetManager extends com.badlogic.gdx.assets.AssetManager {
     private HashMap<String, Sprite> spriteHashMap;
     private static final String TEXTURES = "textures/textures.pack";
+    public static final String GAME_OVER = "textures/gameOver.png";
     public static final String CHAIN_TEXTURE = "textures/asinsvads3.png";
     public static final String ENEMY_ONE = "textures/enemy2.png";
     public static final String ENEMY_TWO = "textures/enemy1.png";
@@ -47,6 +48,7 @@ public class AssetManager extends com.badlogic.gdx.assets.AssetManager {
 
         //load("TEDTURENAMVE", Texture.class);
         this.load(ENEMY_TWO, Texture.class);
+        this.load(GAME_OVER, Texture.class);
         this.load(BACK_GROUND, Texture.class);
         this.load(ENEMY_ONE, Texture.class);
         this.load(ENEMY_FOUR, Texture.class);
