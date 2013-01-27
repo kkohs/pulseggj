@@ -32,7 +32,7 @@ public class ObjEmitter extends ActionEntity {
     public void update() {
         long t = applicationContainer.getCurrTime();
         if (t >= nextSpawn) {
-            if (maxCdTime > 5000) maxCdTime -= 500;
+            if (maxCdTime > 5000) maxCdTime -= 1000;
             float size = 0;
             AbstractEntity entity;
             if (random.nextBoolean()) {
@@ -55,7 +55,7 @@ public class ObjEmitter extends ActionEntity {
             vel.mul(random.nextFloat() * speedModifier / size);
             entity.getBody().applyForceToCenter(vel);
             nextSpawn = t + (long) (random.nextFloat() * (float) maxCdTime);
-            spawn.play(0.5f);
+            spawn.play(0.25f);
         }
     }
 
