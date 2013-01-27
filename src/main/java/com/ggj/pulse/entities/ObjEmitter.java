@@ -55,7 +55,7 @@ public class ObjEmitter extends ActionEntity {
             vel.mul(random.nextFloat() * speedModifier / size);
             entity.getBody().applyForceToCenter(vel);
             nextSpawn = t + (long) (random.nextFloat() * (float) maxCdTime);
-            spawn.play();
+            spawn.play(0.5f);
         }
     }
 
