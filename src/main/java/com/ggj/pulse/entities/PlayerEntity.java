@@ -166,7 +166,7 @@ public class PlayerEntity extends ActionEntity {
             sprite.setSize(20 * scaleX * 2 - (pulseTime % (pulse + pulseSpeed * 5)), 20 * scaleY * 2 - (pulseTime % (pulse + pulseSpeed * 5)));
             if ((pulseTime % (pulse + pulseSpeed * 5)) == 0) {
                 beat.stop();
-                beat.play();
+                beat.play(1f);
             }
         } else {
             beat.stop();
