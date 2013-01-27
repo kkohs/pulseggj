@@ -86,6 +86,7 @@ public class EntityFactory {
 
     public AbstractEntity createBox(float x, float y, float halfWidth, float halfHeight, float angle) {
         Shape shape = new PolygonShape();
+        halfWidth /= 3;
         ((PolygonShape) shape).setAsBox(halfWidth, halfHeight);
         RectangleEntity entity = new RectangleEntity(applicationContainer);
         entity.setPos(new Vector2(x, y));
