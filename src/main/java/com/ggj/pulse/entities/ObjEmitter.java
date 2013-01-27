@@ -32,7 +32,7 @@ public class ObjEmitter extends ActionEntity {
     public void update() {
         long t = applicationContainer.getCurrTime();
         if (t >= nextSpawn) {
-            if (maxCdTime > 2000) maxCdTime -= 2000;
+            if (maxCdTime > 5000) maxCdTime -= 2000;
             float size = 0;
             AbstractEntity entity;
             if (random.nextBoolean()) {
