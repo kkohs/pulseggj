@@ -133,6 +133,7 @@ public class PulseGame extends Game {
 
     public static void main(String[] args) {
         LwjglApplicationConfiguration configuration = new LwjglApplicationConfiguration();
+        configuration.title = "Pulse";
         configuration.resizable = false;
         configuration.useGL20 = true;
         configuration.width = 1366;
