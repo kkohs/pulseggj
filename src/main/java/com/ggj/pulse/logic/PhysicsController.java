@@ -43,7 +43,7 @@ public class PhysicsController {
         for (ActionEntity entity : actionEntities) {
             entity.update();
         }
-        world.step(Gdx.graphics.getDeltaTime(), 10, 10);
+        world.step(step, 10, 10);
     }
 
 
