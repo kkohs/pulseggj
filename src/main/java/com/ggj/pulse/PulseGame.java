@@ -42,7 +42,6 @@ public class PulseGame extends Game {
 
     @Override
     public void create() {
-        System.out.println((boolean)(gameScreen == null));
         if (!started) {
             logger = new FPSLogger();
             applicationContainer = new ApplicationContainer();
